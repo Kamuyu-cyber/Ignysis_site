@@ -6,6 +6,10 @@
   --accent: #4f8cff;
 }
 
+.check {
+  border: 1px solid #19ae32;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -26,11 +30,11 @@ body {
   color: var(--accent);
 }
 
-/* Marquee animation for Trusted By section */
-@keyframes scroll-x {
+/* Marquee animation for Ignysis banner */
+@keyframes ignysis-marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-.animate-scroll-x {
-  animation: scroll-x 18s linear infinite;
+.animate-ignysis-marquee {
+  animation: ignysis-marquee 18s linear infinite;
 }

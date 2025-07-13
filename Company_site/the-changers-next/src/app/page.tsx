@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import React, { useState, useEffect } from "react"; // Added for FAQAccordion
 import UsageChart from "./UsageChart";
+import { ChevronDown } from "lucide-react";
+import Nature3DBackground from "./NeuralNetworkBackground";
 
 const team = [
   { name: "Cheruiyot Elkanah", title: "CEO", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=ceo&backgroundColor=blue,red,white&accessoriesProbability=100" },
@@ -37,6 +39,41 @@ const offerings = [
     title: "Predictive Analytics",
     desc: "Data-driven insights for smarter decisions.",
     icon: "📈",
+  },
+  {
+    title: "Natural Language Processing",
+    desc: "Extract meaning and automate tasks from text and speech.",
+    icon: "🗣️",
+  },
+  {
+    title: "Computer Vision",
+    desc: "Image and video analysis for real-world applications.",
+    icon: "👁️",
+  },
+  {
+    title: "AI Chatbots",
+    desc: "Conversational agents for support and engagement.",
+    icon: "💬",
+  },
+  {
+    title: "Recommendation Systems",
+    desc: "Personalized content and product suggestions.",
+    icon: "🎯",
+  },
+  {
+    title: "Data Engineering",
+    desc: "Robust pipelines for data collection and processing.",
+    icon: "🛠️",
+  },
+  {
+    title: "AI Strategy Consulting",
+    desc: "Expert guidance to unlock AI value for your business.",
+    icon: "🧠",
+  },
+  {
+    title: "Edge AI Solutions",
+    desc: "Deploy AI on devices for real-time intelligence.",
+    icon: "📱",
   },
 ];
 
@@ -116,72 +153,118 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground transition-colors duration-500">
-      {/* Dark/Light Mode Toggle */}
-      <button
-        className="fixed top-4 right-4 z-50 px-4 py-2 rounded-full bg-gray-200 dark:bg-gray-800 text-xs font-semibold shadow hover:bg-accent hover:text-white dark:hover:bg-accent dark:hover:text-white transition-colors"
-        onClick={() => setDark((d) => !d)}
-        aria-label="Toggle dark mode"
-      >
-        {dark ? "☀️ Light Mode" : "🌙 Dark Mode"}
-      </button>
       {/* Hero Section */}
-      <section className="flex flex-col items-center justify-center text-center py-20 px-4 md:px-0">
-        <motion.h1
-          initial={{ opacity: 0, y: -40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-4xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-red-500 to-blue-400 dark:from-blue-200 dark:via-red-400 dark:to-blue-400"
-        >
-          The Changers
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.8 }}
-          className="mt-6 text-lg md:text-2xl max-w-2xl"
-        >
-          Building intelligent AI solutions for a changing world. Our mission: Empower organizations with innovative, scalable, and ethical AI.
-        </motion.p>
-        <motion.a
-          href="#contact"
-          whileHover={{ scale: 1.08 }}
-          whileTap={{ scale: 0.97 }}
-          className="mt-10 px-8 py-4 rounded-full bg-white dark:bg-gray-800 text-blue-600 dark:text-white font-bold text-lg shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-200 dark:focus:ring-red-400 transition-all duration-300"
-        >
-          Get Started
-        </motion.a>
+      <section id="hero" className="min-h-screen relative p-0 m-0">
+        {/* Browser tabs simulation - now a live flowing marquee */}
+        <div className="bg-gray-800 text-white text-xs py-1 px-0 flex items-center gap-0 overflow-hidden">
+          <div className="w-full overflow-hidden relative">
+            <div className="flex gap-1 animate-ignysis-marquee whitespace-nowrap" style={{ minWidth: 'max-content' }}>
+              {Array.from({ length: 16 }).map((_, i) => (
+                <div key={i} className="whitespace-nowrap px-3 py-1 bg-gray-700 rounded-t-sm">
+                  IGNYsis: AI SOLUTIONS ★
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        {/* Main hero section */}
+        <div className="relative h-screen">
+          {/* Hero background image restored */}
+          <div className="absolute inset-0 w-full h-full z-0">
+            <img src="/wallhaven-xel95o.jpg" alt="Hero Background" className="object-cover w-full h-full" />
+            <div className="absolute inset-0 bg-black/20" />
+          </div>
+          {/* Overlay content */}
+          <div className="absolute inset-0 bg-black/30 flex flex-col items-center justify-center text-center text-white px-4 z-10">
+            {/* Nav bar */}
+            <nav className="w-full flex justify-center md:justify-between items-center py-4 px-2 md:px-8 absolute top-0 left-0 z-20">
+              <span className="text-lg md:text-2xl font-bold tracking-widest">IGNYSIS</span>
+              <ul className="hidden md:flex gap-8 text-base font-medium">
+                <li><a href="#hero" className="hover:text-accent transition-colors">Home</a></li>
+                <li><a href="#whatwedo" className="hover:text-accent transition-colors">What We Do</a></li>
+                <li><a href="#workdone" className="hover:text-accent transition-colors">Work Done</a></li>
+                <li><a href="#team" className="hover:text-accent transition-colors">Team</a></li>
+                <li><a href="#contact" className="hover:text-accent transition-colors">Contact</a></li>
+              </ul>
+            </nav>
+            <div className="max-w-4xl mx-auto mt-24 md:mt-32">
+              {/* Top tagline */}
+              <p className="text-sm md:text-base font-medium tracking-widest uppercase mb-8 opacity-90">
+                Intelligent Solutions, Real Impact
+              </p>
+              {/* Main heading */}
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif mb-6">
+                IGNYsis
+              </h1>
+              {/* New subtitle below heading */}
+              <p className="text-2xl md:text-3xl font-semibold mb-8 opacity-95">
+                Igniting systemic change
+              </p>
+              {/* Subtitle */}
+              <p className="text-lg md:text-xl font-light mb-16 opacity-90">
+                Building the future with AI for Africa and beyond
+              </p>
+            </div>
+            {/* Scroll indicator */}
+            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+              <div className="w-12 h-12 rounded-full border-2 border-white/50 flex items-center justify-center animate-bounce">
+                <ChevronDown className="w-5 h-5" />
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
+      {/* Blurred border line between hero and What We Do */}
+      <div className="w-full h-0.5 bg-blue-200/60 backdrop-blur-md shadow-[0_0_16px_2px_rgba(59,130,246,0.15)] my-0 z-30 relative"></div>
+
       {/* What We Do */}
-      <motion.section
-        className="py-16 px-4 max-w-6xl mx-auto"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionVariants}
+      <section
+        id="whatwedo"
+        className="relative min-h-screen w-full flex items-center justify-center px-0 py-0 overflow-hidden"
       >
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">What We Do</h2>
-        <div className="grid gap-8 md:grid-cols-3">
-          {offerings.map((offering, i) => (
-            <motion.div
-              key={offering.title}
-              className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8 flex flex-col items-center hover:scale-105 transition-transform cursor-pointer border border-gray-200 dark:border-transparent hover:border-blue-400"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={sectionVariants}
-            >
-              <span className="text-5xl mb-4">{offering.icon}</span>
-              <h3 className="text-xl font-semibold mb-2">{offering.title}</h3>
-              <p className="text-gray-700 dark:text-gray-300">{offering.desc}</p>
-            </motion.div>
-          ))}
+        {/* Background image */}
+        <Image
+          src="/2.jpg"
+          alt="AI background"
+          fill
+          className="object-cover object-center z-0"
+          priority
+        />
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/60 z-10" />
+        {/* Content */}
+        <div className="relative z-20 w-full px-2 md:px-8 lg:px-16 flex flex-col items-center justify-center text-center text-white min-h-screen">
+          <div className="max-w-3xl mx-auto space-y-4 mb-6">
+            <p className="text-xs font-medium tracking-widest uppercase text-gray-200">What We Do</p>
+            <h2 className="text-3xl md:text-5xl font-serif font-bold leading-tight">AI Solutions for Real Impact</h2>
+            <p className="text-gray-200 leading-relaxed max-w-2xl mx-auto text-base md:text-lg">
+              We deliver cutting-edge AI, automation, and analytics to help you innovate, scale, and succeed. Explore our core offerings below.
+            </p>
+            <a href="#contact" className="inline-flex items-center gap-2 text-base font-semibold tracking-wide border-b-2 border-white pb-1 hover:pl-2 transition-all group w-fit mx-auto">
+              Get in Touch
+              <span className="group-hover:translate-x-1 transition-transform">→</span>
+            </a>
+          </div>
+          <div className="grid gap-4 md:grid-cols-3 w-full max-w-5xl mx-auto">
+            {offerings.map((offering, i) => (
+              <div
+                key={offering.title}
+                className="bg-white/80 rounded-xl shadow-lg p-4 flex flex-col items-center border border-solid border-[3.5px] border-blue-200/60 backdrop-blur-2xl hover:shadow-[0_0_24px_4px_rgba(59,130,246,0.25)] hover:border-blue-400 transition-all duration-200 min-h-[160px] text-black"
+              >
+                <span className="text-3xl mb-2">{offering.icon}</span>
+                <h3 className="text-lg font-semibold mb-1 text-center font-serif">{offering.title}</h3>
+                <p className="text-gray-700 text-center text-sm">{offering.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      </motion.section>
+      </section>
 
       {/* Work Done */}
       <motion.section
-        className="py-16 px-4 max-w-6xl mx-auto"
+        id="workdone"
+        className="py-16 px-4 max-w-6xl mx-auto mt-24 mb-24 bg-white text-black rounded-3xl shadow-xl border border-gray-100"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
@@ -217,7 +300,8 @@ export default function Home() {
 
       {/* Why Choose Us */}
       <motion.section
-        className="py-16 px-4 max-w-6xl mx-auto"
+        id="whychoose"
+        className="py-16 px-4 max-w-6xl mx-auto mt-24 mb-24 bg-white text-black rounded-3xl shadow-xl border border-gray-100"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
@@ -243,6 +327,7 @@ export default function Home() {
 
       {/* Trusted By */}
       <motion.section
+        id="trustedby"
         className="py-16 px-4 max-w-6xl mx-auto"
         initial="hidden"
         whileInView="visible"
@@ -281,6 +366,7 @@ export default function Home() {
 
       {/* Meet the Team */}
       <motion.section
+        id="team"
         className="py-16 px-4 max-w-6xl mx-auto"
         initial="hidden"
         whileInView="visible"
@@ -313,6 +399,7 @@ export default function Home() {
 
       {/* Frequently Asked Questions */}
       <motion.section
+        id="faq"
         className="py-16 px-4 max-w-3xl mx-auto"
         initial="hidden"
         whileInView="visible"
@@ -324,7 +411,7 @@ export default function Home() {
       </motion.section>
 
       {/* Usage Chart Section */}
-      <section className="flex flex-col items-center justify-center py-10 px-4 md:px-0">
+      <section id="usage" className="flex flex-col items-center justify-center py-10 px-4 md:px-0">
         <h2 className="text-2xl md:text-3xl font-bold mb-4 accent">Live Service Usage</h2>
         <UsageChart dark={dark} />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">* Chart updates live to show how people use our services</p>
@@ -351,8 +438,12 @@ export default function Home() {
         </a>
       </motion.section>
       <footer className="w-full py-2 text-center text-xs text-gray-500 dark:text-gray-400 bg-transparent mt-4">
-        &copy; {new Date().getFullYear()} The Changers. All rights reserved.
+        &copy; {new Date().getFullYear()} Ignysis. All rights reserved.
       </footer>
+      {/* Add smooth scrolling to the page */}
+      <style jsx global>{`
+        html { scroll-behavior: smooth; }
+      `}</style>
     </div>
   );
 }
