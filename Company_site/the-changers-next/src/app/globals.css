@@ -6,10 +6,6 @@
   --accent: #4f8cff;
 }
 
-.check {
-  border: 1px solid #19ae32;
-}
-
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;

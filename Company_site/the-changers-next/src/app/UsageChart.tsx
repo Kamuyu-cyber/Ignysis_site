@@ -31,7 +31,7 @@ export default function UsageChart({ dark }: { dark: boolean }) {
   }, []);
 
   return (
-    <div className="w-full max-w-6xl h-[28rem] bg-gradient-to-br from-gray-100 via-white to-gray-200 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 rounded-2xl shadow-2xl p-8 flex items-center border border-gray-200 dark:border-gray-800">
+    <div className="w-full max-w-6xl h-[28rem] bg-gradient-to-br from-gray-100 via-white to-gray-200 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 rounded-2xl shadow-2xl p-8 flex items-center">
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={usageData} margin={{ top: 20, right: 40, left: 0, bottom: 0 }}>
           <CartesianGrid strokeDasharray="4 4" stroke="#e5e7eb" />

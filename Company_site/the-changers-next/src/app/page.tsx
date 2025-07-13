@@ -6,6 +6,9 @@ import React, { useState, useEffect } from "react"; // Added for FAQAccordion
 import UsageChart from "./UsageChart";
 import { ChevronDown } from "lucide-react";
 import Nature3DBackground from "./NeuralNetworkBackground";
+import { useInView } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
+import { ArrowRight, MessageCircle, X } from "lucide-react";
 
 const team = [
   { name: "Cheruiyot Elkanah", title: "CEO", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=ceo&backgroundColor=blue,red,white&accessoriesProbability=100" },
@@ -135,6 +138,39 @@ const workDone = [
   }
 ];
 
+const services = [
+  {
+    category: "HealthTech",
+    title: "AI-Powered Medical Diagnostics",
+    description: "Utilize advanced machine learning algorithms to analyze medical images and provide instant, accurate diagnoses for a wide range of conditions.",
+  },
+  {
+    category: "AgriTech",
+    title: "Precision Agriculture Solutions",
+    description: "Leverage computer vision and IoT sensors to monitor crop health, predict yields, and optimize farming practices for sustainable agriculture.",
+  },
+  {
+    category: "FinTech",
+    title: "Fraud Detection & Risk Assessment",
+    description: "Implement robust AI models to detect anomalies, identify suspicious transactions, and assess creditworthiness with high accuracy.",
+  },
+  {
+    category: "EducationTech",
+    title: "Smart Learning Platforms",
+    description: "Develop intelligent tutoring systems and personalized learning experiences to enhance educational outcomes and engagement.",
+  },
+  {
+    category: "EnergyTech",
+    title: "Energy Efficiency Analytics",
+    description: "Utilize AI to optimize energy consumption, predict maintenance needs, and reduce operational costs in the energy sector.",
+  },
+  {
+    category: "Manufacturing",
+    title: "Predictive Maintenance",
+    description: "Implement AI-driven systems to predict equipment failures, optimize production, and reduce downtime in industrial environments.",
+  },
+];
+
 const sectionVariants = {
   hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
@@ -151,17 +187,23 @@ export default function Home() {
     }
   }, [dark]);
 
+  // Animation replay on hero in view
+  const heroRef = React.useRef(null);
+  const inView = useInView(heroRef, { amount: 0.5 });
+
+  const [showChat, setShowChat] = useState(false);
+
   return (
     <div className="min-h-screen bg-background text-foreground transition-colors duration-500">
       {/* Hero Section */}
-      <section id="hero" className="min-h-screen relative p-0 m-0">
+      <section id="hero" className="min-h-screen relative p-0 m-0" ref={heroRef}>
         {/* Browser tabs simulation - now a live flowing marquee */}
         <div className="bg-gray-800 text-white text-xs py-1 px-0 flex items-center gap-0 overflow-hidden">
           <div className="w-full overflow-hidden relative">
             <div className="flex gap-1 animate-ignysis-marquee whitespace-nowrap" style={{ minWidth: 'max-content' }}>
               {Array.from({ length: 16 }).map((_, i) => (
-                <div key={i} className="whitespace-nowrap px-3 py-1 bg-gray-700 rounded-t-sm">
-                  IGNYsis: AI SOLUTIONS ★
+                <div key={i} className="whitespace-nowrap px-3 py-1" style={{ backgroundColor: '#3C3B6E' }}>
+                  IGNYsis: AI SOLUTIONS
                 </div>
               ))}
             </div>
@@ -169,9 +211,16 @@ export default function Home() {
         </div>
         {/* Main hero section */}
         <div className="relative h-screen">
-          {/* Hero background image restored */}
+          {/* Hero background video */}
           <div className="absolute inset-0 w-full h-full z-0">
-            <img src="/wallhaven-xel95o.jpg" alt="Hero Background" className="object-cover w-full h-full" />
+            <video
+              src="/1.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="object-cover w-full h-full"
+            />
             <div className="absolute inset-0 bg-black/20" />
           </div>
           {/* Overlay content */}
@@ -193,17 +242,85 @@ export default function Home() {
                 Intelligent Solutions, Real Impact
               </p>
               {/* Main heading */}
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif mb-6">
-                IGNYsis
-              </h1>
-              {/* New subtitle below heading */}
-              <p className="text-2xl md:text-3xl font-semibold mb-8 opacity-95">
+              <motion.h1
+                className="text-5xl md:text-7xl lg:text-8xl font-serif mb-6 flex justify-center"
+                initial="hidden"
+                animate={inView ? "visible" : "hidden"}
+                variants={{}}
+              >
+                {/* Swoosh in the first letter, then stagger the rest */}
+                <motion.span
+                  variants={{
+                    hidden: { opacity: 0, x: -120, scale: 2, rotate: -30 },
+                    visible: {
+                      opacity: 1,
+                      x: 0,
+                      scale: 1,
+                      rotate: 0,
+                      transition: { type: 'spring', stiffness: 80, damping: 18, delay: 0.4, duration: 0.9 }
+                    }
+                  }}
+                  className="inline-block text-accent drop-shadow-lg"
+                >
+                  I
+                </motion.span>
+                {['G', 'N', 'Y', 's', 'i', 's'].map((char, i) => (
+                  <motion.span
+                    key={char + i}
+                    variants={{
+                      hidden: { opacity: 0, x: -40, scale: 0.8 },
+                      visible: (custom) => ({
+                        opacity: 1,
+                        x: 0,
+                        scale: 1,
+                        transition: {
+                          type: 'spring',
+                          stiffness: 70,
+                          damping: 18,
+                          delay: 0.7 + custom * 0.18,
+                          duration: 0.7
+                        }
+                      })
+                    }}
+                    custom={i}
+                    className="inline-block"
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+              </motion.h1>
+              {/* Animated subtitle below heading */}
+              <motion.p
+                className="text-2xl md:text-3xl font-semibold mb-8 opacity-95"
+                initial="hidden"
+                animate={inView ? "visible" : "hidden"}
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { delay: 1.9, duration: 0.8, type: 'spring', stiffness: 60 }
+                  }
+                }}
+              >
                 Igniting systemic change
-              </p>
-              {/* Subtitle */}
-              <p className="text-lg md:text-xl font-light mb-16 opacity-90">
+              </motion.p>
+              {/* Animated tagline */}
+              <motion.p
+                className="text-lg md:text-xl font-light mb-16 opacity-90"
+                initial="hidden"
+                animate={inView ? "visible" : "hidden"}
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { delay: 2.3, duration: 0.8, type: 'spring', stiffness: 60 }
+                  }
+                }}
+              >
                 Building the future with AI for Africa and beyond
-              </p>
+              </motion.p>
             </div>
             {/* Scroll indicator */}
             <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
@@ -215,88 +332,249 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Blurred border line between hero and What We Do */}
-      <div className="w-full h-0.5 bg-blue-200/60 backdrop-blur-md shadow-[0_0_16px_2px_rgba(59,130,246,0.15)] my-0 z-30 relative"></div>
-
-      {/* What We Do */}
-      <section
-        id="whatwedo"
-        className="relative min-h-screen w-full flex items-center justify-center px-0 py-0 overflow-hidden"
-      >
-        {/* Background image */}
-        <Image
-          src="/2.jpg"
-          alt="AI background"
-          fill
-          className="object-cover object-center z-0"
-          priority
-        />
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/60 z-10" />
-        {/* Content */}
-        <div className="relative z-20 w-full px-2 md:px-8 lg:px-16 flex flex-col items-center justify-center text-center text-white min-h-screen">
-          <div className="max-w-3xl mx-auto space-y-4 mb-6">
-            <p className="text-xs font-medium tracking-widest uppercase text-gray-200">What We Do</p>
-            <h2 className="text-3xl md:text-5xl font-serif font-bold leading-tight">AI Solutions for Real Impact</h2>
-            <p className="text-gray-200 leading-relaxed max-w-2xl mx-auto text-base md:text-lg">
-              We deliver cutting-edge AI, automation, and analytics to help you innovate, scale, and succeed. Explore our core offerings below.
-            </p>
-            <a href="#contact" className="inline-flex items-center gap-2 text-base font-semibold tracking-wide border-b-2 border-white pb-1 hover:pl-2 transition-all group w-fit mx-auto">
-              Get in Touch
-              <span className="group-hover:translate-x-1 transition-transform">→</span>
-            </a>
-          </div>
-          <div className="grid gap-4 md:grid-cols-3 w-full max-w-5xl mx-auto">
-            {offerings.map((offering, i) => (
-              <div
-                key={offering.title}
-                className="bg-white/80 rounded-xl shadow-lg p-4 flex flex-col items-center border border-solid border-[3.5px] border-blue-200/60 backdrop-blur-2xl hover:shadow-[0_0_24px_4px_rgba(59,130,246,0.25)] hover:border-blue-400 transition-all duration-200 min-h-[160px] text-black"
-              >
-                <span className="text-3xl mb-2">{offering.icon}</span>
-                <h3 className="text-lg font-semibold mb-1 text-center font-serif">{offering.title}</h3>
-                <p className="text-gray-700 text-center text-sm">{offering.desc}</p>
+      {/* Services We Offer Section */}
+      <section id="services" className="relative min-h-screen w-full flex flex-col items-center justify-center px-0 py-0 bg-gray-50 overflow-hidden">
+        {/* Blurred video background */}
+        <div className="absolute inset-0 w-full h-full z-0">
+          <video
+            src="/2.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="object-cover w-full h-full"
+            style={{ filter: 'blur(16px) brightness(1.2) saturate(1.2)' }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-100/70 via-white/80 to-blue-400/60 mix-blend-lighten" />
+        </div>
+        <div className="relative z-10 w-full max-w-7xl mx-auto py-16">
+          {/* Header with filter and search */}
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12 gap-6 px-4">
+            <h2 className="text-4xl font-bold text-center md:text-left text-blue-700">Explore our solutions</h2>
+            <div className="flex flex-col md:flex-row md:items-center gap-4 w-full md:w-auto justify-center">
+              <button className="flex items-center gap-2 border border-gray-300 rounded-full px-5 py-2 bg-white hover:bg-blue-50 text-gray-800 font-medium shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 6h18M6 6v12m12-12v12M6 18h12" /></svg>
+                Filter by category
+              </button>
+              <div className="flex items-center border-b border-gray-300 bg-white rounded-full px-3 py-2 w-full md:w-72">
+                <svg className="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" strokeLinecap="round" /></svg>
+                <input type="text" placeholder="Search categories" className="bg-transparent outline-none w-full text-gray-700 placeholder-gray-500" />
               </div>
-            ))}
+            </div>
           </div>
+          <div className="text-gray-700 text-sm mb-6 px-4">Displaying 1-8 ({services.length})</div>
+          {/* Animated services grid */}
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.3 }}
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  staggerChildren: 0.15
+                }
+              }
+            }}
+          >
+            {services.map((service, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -200 : 200 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, type: 'spring', stiffness: 60 }}
+                viewport={{ once: false, amount: 0.3 }}
+                className="w-full"
+              >
+                <div
+                  className="group cursor-pointer transition-all duration-200 hover:shadow-lg bg-white border-0 shadow-sm hover:border-blue-400 rounded-xl"
+                >
+                  <div className="p-6 h-full flex flex-col">
+                    <div className="text-xs font-medium text-blue-600 uppercase tracking-wide mb-3">
+                      {service.category}
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-3 leading-tight group-hover:text-blue-700 transition-colors duration-200">
+                      {service.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm leading-relaxed mb-6">
+                      {service.description}
+                    </p>
+                    <div className="flex items-center justify-end">
+                      <ArrowRight className="w-5 h-5 text-blue-400 group-hover:text-blue-700 group-hover:translate-x-1 transition-all duration-200" />
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+      {/* Animated, blurry, modern border between hero and services */}
+      <div className="relative w-full flex justify-center items-center z-30">
+        <div className="h-2 w-3/4 bg-gradient-to-r from-blue-500 via-red-400 to-blue-500 rounded-full blur-md shadow-lg animate-pulse transition-all duration-700" style={{ filter: 'blur(6px)' }} />
+        <div className="absolute left-1/2 top-1/2 w-1/2 h-1 bg-gradient-to-r from-blue-400/60 via-white/40 to-red-400/60 rounded-full opacity-80 animate-pulse" style={{ transform: 'translate(-50%, -50%)' }} />
+      </div>
+      {/* Animated Chat Widget */}
+      {showChat && (
+        <motion.div
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, type: 'spring', stiffness: 60 }}
+          className="fixed bottom-6 right-6 z-50"
+        >
+          <div className="bg-gray-800 text-white p-4 rounded-lg shadow-lg max-w-sm relative border-t-4 border-red-600">
+            <button
+              onClick={() => setShowChat(false)}
+              className="absolute top-2 right-2 text-gray-400 hover:text-white"
+            >
+              <X className="w-4 h-4" />
+            </button>
+            <div className="flex items-start space-x-3">
+              <div className="bg-red-600 rounded-full p-2 flex-shrink-0">
+                <MessageCircle className="w-4 h-4" />
+              </div>
+              <div className="text-sm">
+                <p>Hi, I can connect you with a representative or answer questions you have on our services.</p>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      )}
+      {/* Animated Chat Button when widget is closed */}
+      {!showChat && (
+        <motion.button
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, type: 'spring', stiffness: 80 }}
+          onClick={() => setShowChat(true)}
+          className="fixed bottom-6 right-6 bg-gray-800 text-white p-3 rounded-full shadow-lg hover:bg-red-600 transition-colors z-50 relative"
+        >
+          <MessageCircle className="w-6 h-6" />
+          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+            1
+          </span>
+        </motion.button>
+      )}
+
+      {/* Work Done Section - seamless, card-based, with filter/search and matching background */}
+      <section id="workdone" className="relative w-full flex flex-col items-center justify-center px-0 py-0 bg-gray-50 overflow-hidden" style={{marginTop: 0, paddingTop: 0}}>
+        {/* Blurred video background, matching services section */}
+        <div className="absolute inset-0 w-full h-full z-0">
+          <video
+            src="/2.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="object-cover w-full h-full"
+            style={{ filter: 'blur(16px) brightness(1.2) saturate(1.2)' }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-100/70 via-white/80 to-blue-400/60 mix-blend-lighten" />
+        </div>
+        <div className="relative z-10 w-full max-w-7xl mx-auto py-16">
+          {/* Header with filter and search */}
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12 gap-6 px-4">
+            <h2 className="text-4xl font-bold text-center md:text-left text-blue-700">Explore our work</h2>
+            <div className="flex flex-col md:flex-row md:items-center gap-4 w-full md:w-auto justify-center">
+              <button className="flex items-center gap-2 border border-gray-300 rounded-full px-5 py-2 bg-white hover:bg-blue-50 text-gray-800 font-medium shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 6h18M6 6v12m12-12v12M6 18h12" /></svg>
+                Filter by category
+              </button>
+              <div className="flex items-center border-b border-gray-300 bg-white rounded-full px-3 py-2 w-full md:w-72">
+                <svg className="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" strokeLinecap="round" /></svg>
+                <input type="text" placeholder="Search by project or category" className="bg-transparent outline-none w-full text-gray-700 placeholder-gray-500" />
+              </div>
+            </div>
+          </div>
+          <div className="text-gray-700 text-sm mb-6 px-4">Displaying 1-{workDone.length} ({workDone.length})</div>
+          {/* Animated work done grid */}
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.3 }}
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  staggerChildren: 0.15
+                }
+              }
+            }}
+          >
+            {workDone.map((project, index) => (
+              <motion.div
+                key={project.title}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -200 : 200 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, type: 'spring', stiffness: 60 }}
+                viewport={{ once: false, amount: 0.3 }}
+                className="w-full"
+              >
+                <div className="group cursor-pointer transition-all duration-200 hover:shadow-lg bg-gray-100 shadow-sm hover:border-blue-400 rounded-xl flex flex-col h-full">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-48 object-cover rounded-t-xl mb-4"
+                  />
+                  <div className="p-6 flex-1 flex flex-col">
+                    <div className="text-xs font-medium text-blue-600 uppercase tracking-wide mb-2">{project.category}</div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-2 leading-tight group-hover:text-blue-700 transition-colors duration-200">{project.title}</h3>
+                    {project.desc.map((d, idx) => (
+                      <p key={idx} className="text-gray-600 text-sm leading-relaxed mb-2">{d}</p>
+                    ))}
+                  </div>
+                  <div className="flex items-center justify-end px-6 pb-4">
+                    <ArrowRight className="w-5 h-5 text-blue-400 group-hover:text-blue-700 group-hover:translate-x-1 transition-all duration-200" />
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
-      {/* Work Done */}
-      <motion.section
-        id="workdone"
-        className="py-16 px-4 max-w-6xl mx-auto mt-24 mb-24 bg-white text-black rounded-3xl shadow-xl border border-gray-100"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionVariants}
+      {/* Persistent AI Assistant Chat Button */}
+      <button
+        onClick={() => setShowChat(true)}
+        className="fixed bottom-6 right-6 bg-gray-900 text-white p-4 rounded-full shadow-lg hover:bg-blue-600 transition-colors z-50 flex items-center justify-center"
+        style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.18)' }}
       >
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">Work Done</h2>
-        <div className="grid gap-10 md:grid-cols-2">
-          {workDone.map((project, i) => (
-            <motion.div
-              key={project.title}
-              className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6 flex flex-col md:flex-row gap-6 hover:scale-[1.02] transition-transform border border-transparent hover:border-blue-400"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={sectionVariants}
+        <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="7" rx="2" /><path d="M8 11V7a4 4 0 1 1 8 0v4" /></svg>
+      </button>
+      {/* AI Assistant Chat Widget */}
+      {showChat && (
+        <motion.div
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, type: 'spring', stiffness: 60 }}
+          className="fixed bottom-24 right-6 z-50"
+        >
+          <div className="bg-white text-gray-900 p-6 rounded-2xl shadow-2xl max-w-md w-full border-t-4 border-blue-600 relative">
+            <button
+              onClick={() => setShowChat(false)}
+              className="absolute top-2 right-2 text-gray-400 hover:text-blue-600"
             >
-              <img
-                src={project.image}
-                alt={project.title}
-                className="w-full md:w-40 h-32 object-cover rounded-lg shadow mb-4 md:mb-0"
-              />
-              <div>
-                <div className="text-xs font-semibold text-blue-600 dark:text-blue-300 mb-1">{project.category}</div>
-                <h3 className="font-semibold text-lg mb-2">{project.title}</h3>
-                {project.desc.map((d, idx) => (
-                  <p key={idx} className="text-gray-800 dark:text-gray-200 text-sm mb-2">{d}</p>
-                ))}
+              <X className="w-5 h-5" />
+            </button>
+            <div className="flex items-start space-x-3 mb-4">
+              <div className="bg-blue-600 rounded-full p-2 flex-shrink-0">
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="7" rx="2" /><path d="M8 11V7a4 4 0 1 1 8 0v4" /></svg>
               </div>
-            </motion.div>
-          ))}
-        </div>
-      </motion.section>
+              <div className="text-sm">
+                <p>Hello! I'm your AI assistant. How can I help you today?</p>
+              </div>
+            </div>
+            <input
+              type="text"
+              placeholder="Type your message..."
+              className="w-full border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
+            <button className="mt-4 w-full bg-blue-600 text-white rounded-full py-2 font-semibold hover:bg-blue-700 transition-colors">Send</button>
+          </div>
+        </motion.div>
+      )}
 
       {/* Why Choose Us */}
       <motion.section
