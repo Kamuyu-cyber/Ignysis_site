@@ -2,13 +2,15 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import React, { useState, useEffect } from "react"; // Added for FAQAccordion
+import React, { useState, useEffect, useRef } from "react"; // Consolidate imports
 import UsageChart from "./UsageChart";
 import { ChevronDown } from "lucide-react";
 import Nature3DBackground from "./NeuralNetworkBackground";
 import { useInView } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, MessageCircle, X } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const team = [
   { name: "Cheruiyot Elkanah", title: "CEO", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=ceo&backgroundColor=blue,red,white&accessoriesProbability=100" },
@@ -193,19 +195,48 @@ export default function Home() {
 
   const [showChat, setShowChat] = useState(false);
 
+  // Marquee GSAP logic (infinite stream)
+  const marqueeRow = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!marqueeRow.current) return;
+    gsap.set(marqueeRow.current, { x: 0 });
+    const totalWidth = marqueeRow.current.scrollWidth / 2;
+    gsap.to(marqueeRow.current, {
+      x: -totalWidth,
+      duration: 36, // Slower speed
+      ease: "linear",
+      repeat: -1,
+      modifiers: {
+        x: gsap.utils.unitize(x => parseFloat(x) % -totalWidth)
+      }
+    });
+  }, []);
+
   return (
     <div className="min-h-screen bg-background text-foreground transition-colors duration-500">
       {/* Hero Section */}
       <section id="hero" className="min-h-screen relative p-0 m-0" ref={heroRef}>
         {/* Browser tabs simulation - now a live flowing marquee */}
-        <div className="bg-gray-800 text-white text-xs py-1 px-0 flex items-center gap-0 overflow-hidden">
+        <div className="text-white text-xs py-1 px-0 flex items-center gap-0 overflow-hidden" style={{ background: 'transparent' }}>
           <div className="w-full overflow-hidden relative">
-            <div className="flex gap-1 animate-ignysis-marquee whitespace-nowrap" style={{ minWidth: 'max-content' }}>
-              {Array.from({ length: 16 }).map((_, i) => (
-                <div key={i} className="whitespace-nowrap px-3 py-1" style={{ backgroundColor: '#3C3B6E' }}>
-                  IGNYsis: AI SOLUTIONS
-                </div>
-              ))}
+            {/* Infinite GSAP Marquee */}
+            <div className="relative w-full" style={{ height: 32 }}>
+              <div
+                ref={marqueeRow}
+                className="absolute left-0 top-0 flex whitespace-nowrap"
+                style={{ willChange: 'transform' }}
+              >
+                {Array.from({ length: 24 }).map((_, i) => (
+                  <span
+                    key={i}
+                    className="px-6 py-1 text-base font-extrabold tracking-widest uppercase text-white drop-shadow-lg"
+                    style={{ letterSpacing: '0.2em' }}
+                  >
+                    IGNYsis
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
