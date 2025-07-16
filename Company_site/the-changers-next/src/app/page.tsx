@@ -11,6 +11,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, MessageCircle, X } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SectionDivider from "./SectionDivider";
 
 const team = [
   { name: "Cheruiyot Elkanah", title: "CEO", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=ceo&backgroundColor=blue,red,white&accessoriesProbability=100" },
@@ -261,8 +262,8 @@ export default function Home() {
               <span className="text-lg md:text-2xl font-bold tracking-widest">IGNYSIS</span>
               <ul className="hidden md:flex gap-8 text-base font-medium">
                 <li><a href="#hero" className="hover:text-accent transition-colors">Home</a></li>
-                <li><a href="#whatwedo" className="hover:text-accent transition-colors">What We Do</a></li>
-                <li><a href="#workdone" className="hover:text-accent transition-colors">Work Done</a></li>
+                <li><a href="#services" className="hover:text-accent transition-colors">Explore our solutions</a></li>
+                <li><a href="#workdone" className="hover:text-accent transition-colors">Explore our work</a></li>
                 <li><a href="#team" className="hover:text-accent transition-colors">Team</a></li>
                 <li><a href="#contact" className="hover:text-accent transition-colors">Contact</a></li>
               </ul>
@@ -441,54 +442,11 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
-      {/* Animated, blurry, modern border between hero and services */}
-      <div className="relative w-full flex justify-center items-center z-30">
-        <div className="h-2 w-3/4 bg-gradient-to-r from-blue-500 via-red-400 to-blue-500 rounded-full blur-md shadow-lg animate-pulse transition-all duration-700" style={{ filter: 'blur(6px)' }} />
-        <div className="absolute left-1/2 top-1/2 w-1/2 h-1 bg-gradient-to-r from-blue-400/60 via-white/40 to-red-400/60 rounded-full opacity-80 animate-pulse" style={{ transform: 'translate(-50%, -50%)' }} />
-      </div>
-      {/* Animated Chat Widget */}
-      {showChat && (
-        <motion.div
-          initial={{ opacity: 0, y: 100 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, type: 'spring', stiffness: 60 }}
-          className="fixed bottom-6 right-6 z-50"
-        >
-          <div className="bg-gray-800 text-white p-4 rounded-lg shadow-lg max-w-sm relative border-t-4 border-red-600">
-            <button
-              onClick={() => setShowChat(false)}
-              className="absolute top-2 right-2 text-gray-400 hover:text-white"
-            >
-              <X className="w-4 h-4" />
-            </button>
-            <div className="flex items-start space-x-3">
-              <div className="bg-red-600 rounded-full p-2 flex-shrink-0">
-                <MessageCircle className="w-4 h-4" />
-              </div>
-              <div className="text-sm">
-                <p>Hi, I can connect you with a representative or answer questions you have on our services.</p>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-      )}
-      {/* Animated Chat Button when widget is closed */}
-      {!showChat && (
-        <motion.button
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, type: 'spring', stiffness: 80 }}
-          onClick={() => setShowChat(true)}
-          className="fixed bottom-6 right-6 bg-gray-800 text-white p-3 rounded-full shadow-lg hover:bg-red-600 transition-colors z-50 relative"
-        >
-          <MessageCircle className="w-6 h-6" />
-          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-            1
-          </span>
-        </motion.button>
-      )}
 
-      {/* Work Done Section - seamless, card-based, with filter/search and matching background */}
+      {/* Divider between Explore our Solutions and Explore our Work */}
+      <SectionDivider />
+
+      {/* Work Done Section */}
       <section id="workdone" className="relative w-full flex flex-col items-center justify-center px-0 py-0 bg-gray-50 overflow-hidden" style={{marginTop: 0, paddingTop: 0}}>
         {/* Blurred video background, matching services section */}
         <div className="absolute inset-0 w-full h-full z-0">
@@ -607,32 +565,68 @@ export default function Home() {
         </motion.div>
       )}
 
-      {/* Why Choose Us */}
-      <motion.section
+      {/* Why Choose Us - 3D Animated Staircase */}
+      <section
         id="whychoose"
-        className="py-16 px-4 max-w-6xl mx-auto mt-24 mb-24 bg-white text-black rounded-3xl shadow-xl border border-gray-100"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionVariants}
+        className="relative min-h-screen w-full flex flex-col items-center justify-center px-0 py-0 overflow-hidden"
       >
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">Why Choose Us</h2>
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {whyChoose.map((point, i) => (
-            <motion.div
-              key={point.title}
-              className="bg-white dark:bg-gray-900 rounded-xl shadow-md hover:shadow-xl transition-shadow"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={sectionVariants}
-            >
-              <h3 className="font-semibold text-lg mb-2">{point.title}</h3>
-              <p className="text-gray-700 dark:text-gray-300 text-sm">{point.desc}</p>
-            </motion.div>
-          ))}
+        {/* Blurred video background, matching 'Explore our work' */}
+        <div className="absolute inset-0 w-full h-full z-0">
+          <video
+            src="/2.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="object-cover w-full h-full"
+            style={{ filter: 'blur(16px) brightness(1.2) saturate(1.2)' }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-100/70 via-white/80 to-blue-400/60 mix-blend-lighten" />
         </div>
-      </motion.section>
+        <div className="relative z-10 w-full max-w-4xl mx-auto py-24 flex flex-col items-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-center text-blue-700 mb-20 drop-shadow-lg">Why Choose Us</h2>
+          {/* 3D staircase glassmorphism cards with framer-motion */}
+          <div className="flex flex-col items-center w-full" style={{ perspective: 1600 }}>
+            {whyChoose.map((point, i) => (
+              <motion.div
+                key={point.title}
+                initial={{
+                  opacity: 0,
+                  y: 120 + i * 30,
+                  z: -i * 80,
+                  rotateX: 40 - i * 7,
+                  scale: 0.85
+                }}
+                whileInView={{
+                  opacity: 1,
+                  y: i * 44,
+                  z: 0,
+                  rotateX: 0,
+                  scale: 1
+                }}
+                transition={{
+                  delay: 0.2 + i * 0.22,
+                  duration: 1.1,
+                  type: "spring",
+                  stiffness: 60
+                }}
+                viewport={{ once: false, amount: 0.2 }}
+                className="backdrop-blur-xl bg-white/30 shadow-2xl px-10 py-8 mb-[-32px] rounded-3xl w-full max-w-2xl text-center relative border-none"
+                style={{
+                  zIndex: 10 - i,
+                  boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.18)",
+                  border: "none",
+                  WebkitBackdropFilter: "blur(16px)",
+                  background: "linear-gradient(120deg, rgba(255,255,255,0.35) 60%, rgba(180,210,255,0.18) 100%)"
+                }}
+              >
+                <h3 className="text-2xl font-semibold text-blue-700 mb-2 drop-shadow-sm">{point.title}</h3>
+                <p className="text-gray-800 text-lg font-medium drop-shadow-sm">{point.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Trusted By */}
       <motion.section
