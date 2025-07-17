@@ -365,7 +365,7 @@ export default function Home() {
       </section>
 
       {/* Services We Offer Section */}
-      <section id="services" className="relative min-h-screen w-full flex flex-col items-center justify-center px-0 py-0 bg-gray-50 overflow-hidden">
+      <section id="services" className="relative min-h-screen w-full flex flex-col items-center justify-center px-0 py-0 bg-yellow-400 overflow-hidden">
         {/* Blurred video background */}
         <div className="absolute inset-0 w-full h-full z-0">
           <video
@@ -377,12 +377,12 @@ export default function Home() {
             className="object-cover w-full h-full"
             style={{ filter: 'blur(16px) brightness(1.2) saturate(1.2)' }}
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-100/70 via-white/80 to-blue-400/60 mix-blend-lighten" />
+          <div className="absolute inset-0 bg-gradient-to-br from-yellow-200/70 via-white/80 to-yellow-400/60 mix-blend-lighten" />
         </div>
         <div className="relative z-10 w-full max-w-7xl mx-auto py-16">
           {/* Header with filter and search */}
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12 gap-6 px-4">
-            <h2 className="text-4xl font-bold text-center md:text-left text-blue-700">Explore our solutions</h2>
+            <h2 className="text-4xl font-bold text-center md:text-left text-black">Explore our solutions</h2>
             <div className="flex flex-col md:flex-row md:items-center gap-4 w-full md:w-auto justify-center">
               <button className="flex items-center gap-2 border border-gray-300 rounded-full px-5 py-2 bg-white hover:bg-blue-50 text-gray-800 font-medium shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400">
                 <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 6h18M6 6v12m12-12v12M6 18h12" /></svg>
@@ -447,7 +447,7 @@ export default function Home() {
       <SectionDivider />
 
       {/* Work Done Section */}
-      <section id="workdone" className="relative w-full flex flex-col items-center justify-center px-0 py-0 bg-gray-50 overflow-hidden" style={{marginTop: 0, paddingTop: 0}}>
+      <section id="workdone" className="relative w-full flex flex-col items-center justify-center px-0 py-0 bg-white overflow-hidden" style={{marginTop: 0, paddingTop: 0}}>
         {/* Blurred video background, matching services section */}
         <div className="absolute inset-0 w-full h-full z-0">
           <video
@@ -459,12 +459,12 @@ export default function Home() {
             className="object-cover w-full h-full"
             style={{ filter: 'blur(16px) brightness(1.2) saturate(1.2)' }}
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-100/70 via-white/80 to-blue-400/60 mix-blend-lighten" />
+          <div className="absolute inset-0 bg-gradient-to-br from-white/70 via-yellow-100/80 to-yellow-200/60 mix-blend-lighten" />
         </div>
         <div className="relative z-10 w-full max-w-7xl mx-auto py-16">
           {/* Header with filter and search */}
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12 gap-6 px-4">
-            <h2 className="text-4xl font-bold text-center md:text-left text-blue-700">Explore our work</h2>
+            <h2 className="text-4xl font-bold text-center md:text-left text-black">Explore our work</h2>
             <div className="flex flex-col md:flex-row md:items-center gap-4 w-full md:w-auto justify-center">
               <button className="flex items-center gap-2 border border-gray-300 rounded-full px-5 py-2 bg-white hover:bg-blue-50 text-gray-800 font-medium shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400">
                 <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 6h18M6 6v12m12-12v12M6 18h12" /></svg>
@@ -568,7 +568,7 @@ export default function Home() {
       {/* Why Choose Us - 3D Animated Staircase */}
       <section
         id="whychoose"
-        className="relative min-h-screen w-full flex flex-col items-center justify-center px-0 py-0 overflow-hidden"
+        className="relative min-h-screen w-full flex flex-col items-center justify-center px-0 py-0 overflow-hidden bg-black"
       >
         {/* Blurred video background, matching 'Explore our work' */}
         <div className="absolute inset-0 w-full h-full z-0">
@@ -581,10 +581,10 @@ export default function Home() {
             className="object-cover w-full h-full"
             style={{ filter: 'blur(16px) brightness(1.2) saturate(1.2)' }}
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-100/70 via-white/80 to-blue-400/60 mix-blend-lighten" />
+          <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-yellow-900/60 to-black/90 mix-blend-darken" />
         </div>
         <div className="relative z-10 w-full max-w-4xl mx-auto py-24 flex flex-col items-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-center text-blue-700 mb-20 drop-shadow-lg">Why Choose Us</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-center text-yellow-400 mb-20 drop-shadow-lg">Why Choose Us</h2>
           {/* 3D staircase glassmorphism cards with framer-motion */}
           <div className="flex flex-col items-center w-full" style={{ perspective: 1600 }}>
             {whyChoose.map((point, i) => (
@@ -611,17 +611,17 @@ export default function Home() {
                   stiffness: 60
                 }}
                 viewport={{ once: false, amount: 0.2 }}
-                className="backdrop-blur-xl bg-white/30 shadow-2xl px-10 py-8 mb-[-32px] rounded-3xl w-full max-w-2xl text-center relative border-none"
+                className="backdrop-blur-xl bg-black/60 shadow-2xl px-10 py-8 mb-[-32px] rounded-3xl w-full max-w-2xl text-center relative border-none"
                 style={{
                   zIndex: 10 - i,
                   boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.18)",
                   border: "none",
                   WebkitBackdropFilter: "blur(16px)",
-                  background: "linear-gradient(120deg, rgba(255,255,255,0.35) 60%, rgba(180,210,255,0.18) 100%)"
+                  background: "linear-gradient(120deg, rgba(0,0,0,0.85) 60%, rgba(255,215,0,0.18) 100%)"
                 }}
               >
-                <h3 className="text-2xl font-semibold text-blue-700 mb-2 drop-shadow-sm">{point.title}</h3>
-                <p className="text-gray-800 text-lg font-medium drop-shadow-sm">{point.desc}</p>
+                <h3 className="text-2xl font-semibold text-yellow-400 mb-2 drop-shadow-sm">{point.title}</h3>
+                <p className="text-white text-lg font-medium drop-shadow-sm">{point.desc}</p>
               </motion.div>
             ))}
           </div>
