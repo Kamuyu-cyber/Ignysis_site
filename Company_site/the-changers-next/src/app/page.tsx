@@ -1,17 +1,16 @@
 'use client';
 
-import { motion } from "framer-motion";
-import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react"; // Consolidate imports
-import UsageChart from "./UsageChart";
 import { ChevronDown } from "lucide-react";
 import Nature3DBackground from "./NeuralNetworkBackground";
 import { useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, MessageCircle, X } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SectionDivider from "./SectionDivider";
+import UsageChart from "./UsageChart";
 
 const team = [
   { name: "Cheruiyot Elkanah", title: "CEO", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=ceo&backgroundColor=blue,red,white&accessoriesProbability=100" },
@@ -779,10 +778,20 @@ function TrustedBySection() {
     { name: "Ubuntu", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ubuntu/ubuntu-plain.svg" },
     { name: "OpenAI", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/openai/openai-original.svg" },
     { name: "Vercel", src: "https://assets.vercel.com/image/upload/front/favicon/vercel/180x180.png" },
+    { name: "Android", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" },
+    { name: "Bitbucket", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bitbucket/bitbucket-original.svg" },
+    { name: "DigitalOcean", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/digitalocean/digitalocean-original.svg" },
+    { name: "GitLab", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg" },
+    { name: "Heroku", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/heroku/heroku-original.svg" },
+    { name: "Jenkins", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" },
+    { name: "MongoDB", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
+    { name: "MySQL", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+    { name: "PostgreSQL", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
+    { name: "Redis", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" },
   ];
   return (
-    <section className="bg-gray-50 py-16 px-4">
-      <div className="max-w-6xl mx-auto text-center">
+    <section className="bg-gray-50 py-16 px-4 w-full">
+      <div className="max-w-7xl mx-auto text-center py-16 px-4 md:px-8">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 tracking-tight">
           Trusted Companies and Partners
         </h1>
@@ -790,7 +799,7 @@ function TrustedBySection() {
           These global and open-source leaders trust us for real-time network support.
         </p>
         {/* Animated logo grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 items-center justify-center">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-8 items-center justify-center">
           {logos.map((logo, i) => (
             <motion.div
               key={logo.name}
