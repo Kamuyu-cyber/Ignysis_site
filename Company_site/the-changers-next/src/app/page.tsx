@@ -196,6 +196,10 @@ export default function Home() {
 
   const [showChat, setShowChat] = useState(false);
 
+  // Add state for dropdowns
+  const [solutionsOpen, setSolutionsOpen] = useState(false);
+  const [workOpen, setWorkOpen] = useState(false);
+
   // Marquee GSAP logic (infinite stream)
   const marqueeRow = useRef<HTMLDivElement>(null);
 
@@ -216,6 +220,36 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground transition-colors duration-500">
+      {/* Sticky Navbar at the very top */}
+      <nav className="w-full flex justify-center md:justify-between items-center py-4 px-2 md:px-8 sticky top-0 z-50 bg-black/80 backdrop-blur-md shadow-lg">
+        <span className="text-lg md:text-2xl font-bold tracking-widest">IGNYSIS</span>
+        <ul className="hidden md:flex gap-8 text-base font-medium">
+          <li><a href="#hero" className="hover:text-accent transition-colors">Home</a></li>
+          <li className="relative" onMouseEnter={() => setSolutionsOpen(true)} onMouseLeave={() => setSolutionsOpen(false)}>
+            <button className="hover:text-accent transition-colors flex items-center gap-1">Explore our solutions <ChevronDown className="w-4 h-4" /></button>
+            {solutionsOpen && (
+              <div className="absolute left-0 mt-2 w-64 bg-white text-black rounded-xl shadow-xl py-2 z-50">
+                {services.map((service, idx) => (
+                  <a key={idx} href="#services" className="block px-5 py-2 hover:bg-blue-50 text-sm font-medium">{service.title}</a>
+                ))}
+              </div>
+            )}
+          </li>
+          <li className="relative" onMouseEnter={() => setWorkOpen(true)} onMouseLeave={() => setWorkOpen(false)}>
+            <button className="hover:text-accent transition-colors flex items-center gap-1">Explore our work <ChevronDown className="w-4 h-4" /></button>
+            {workOpen && (
+              <div className="absolute left-0 mt-2 w-72 bg-white text-black rounded-xl shadow-xl py-2 z-50">
+                {workDone.map((work, idx) => (
+                  <a key={idx} href="#workdone" className="block px-5 py-2 hover:bg-blue-50 text-sm font-medium">{work.title}</a>
+                ))}
+              </div>
+            )}
+          </li>
+          <li><a href="#team" className="hover:text-accent transition-colors">Team</a></li>
+          <li><a href="#contact" className="hover:text-accent transition-colors">Contact</a></li>
+        </ul>
+      </nav>
+
       {/* Hero Section */}
       <section id="hero" className="min-h-screen relative p-0 m-0" ref={heroRef}>
         {/* Browser tabs simulation - now a live flowing marquee */}
@@ -258,16 +292,6 @@ export default function Home() {
           {/* Overlay content */}
           <div className="absolute inset-0 bg-black/30 flex flex-col items-center justify-center text-center text-white px-4 z-10">
             {/* Nav bar */}
-            <nav className="w-full flex justify-center md:justify-between items-center py-4 px-2 md:px-8 absolute top-0 left-0 z-20">
-              <span className="text-lg md:text-2xl font-bold tracking-widest">IGNYSIS</span>
-              <ul className="hidden md:flex gap-8 text-base font-medium">
-                <li><a href="#hero" className="hover:text-accent transition-colors">Home</a></li>
-                <li><a href="#services" className="hover:text-accent transition-colors">Explore our solutions</a></li>
-                <li><a href="#workdone" className="hover:text-accent transition-colors">Explore our work</a></li>
-                <li><a href="#team" className="hover:text-accent transition-colors">Team</a></li>
-                <li><a href="#contact" className="hover:text-accent transition-colors">Contact</a></li>
-              </ul>
-            </nav>
             <div className="max-w-4xl mx-auto mt-24 md:mt-32">
               {/* Top tagline */}
               <p className="text-sm md:text-base font-medium tracking-widest uppercase mb-8 opacity-90">
@@ -365,7 +389,7 @@ export default function Home() {
       </section>
 
       {/* Services We Offer Section */}
-      <section id="services" className="relative min-h-screen w-full flex flex-col items-center justify-center px-0 py-0 bg-yellow-400 overflow-hidden">
+      <section id="services" className="relative min-h-screen w-full flex flex-col items-center justify-center px-0 py-0 bg-black overflow-hidden">
         {/* Blurred video background */}
         <div className="absolute inset-0 w-full h-full z-0">
           <video
@@ -377,24 +401,25 @@ export default function Home() {
             className="object-cover w-full h-full"
             style={{ filter: 'blur(16px) brightness(1.2) saturate(1.2)' }}
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-yellow-200/70 via-white/80 to-yellow-400/60 mix-blend-lighten" />
+          {/* Gold/black/white gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/70 via-white/80 to-black/80 mix-blend-lighten" />
         </div>
         <div className="relative z-10 w-full max-w-7xl mx-auto py-16">
           {/* Header with filter and search */}
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12 gap-6 px-4">
-            <h2 className="text-4xl font-bold text-center md:text-left text-black">Explore our solutions</h2>
+            <h2 className="text-4xl font-bold text-center md:text-left text-yellow-400 drop-shadow-lg">Explore our solutions</h2>
             <div className="flex flex-col md:flex-row md:items-center gap-4 w-full md:w-auto justify-center">
-              <button className="flex items-center gap-2 border border-gray-300 rounded-full px-5 py-2 bg-white hover:bg-blue-50 text-gray-800 font-medium shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400">
-                <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 6h18M6 6v12m12-12v12M6 18h12" /></svg>
+              <button className="flex items-center gap-2 border border-yellow-300 rounded-full px-5 py-2 bg-white hover:bg-yellow-50 text-gray-800 font-medium shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                <svg className="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 6h18M6 6v12m12-12v12M6 18h12" /></svg>
                 Filter by category
               </button>
-              <div className="flex items-center border-b border-gray-300 bg-white rounded-full px-3 py-2 w-full md:w-72">
-                <svg className="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" strokeLinecap="round" /></svg>
+              <div className="flex items-center border-b border-yellow-300 bg-white rounded-full px-3 py-2 w-full md:w-72">
+                <svg className="w-5 h-5 text-yellow-500 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" strokeLinecap="round" /></svg>
                 <input type="text" placeholder="Search categories" className="bg-transparent outline-none w-full text-gray-700 placeholder-gray-500" />
               </div>
             </div>
           </div>
-          <div className="text-gray-700 text-sm mb-6 px-4">Displaying 1-8 ({services.length})</div>
+          <div className="text-gray-200 text-sm mb-6 px-4">Displaying 1-8 ({services.length})</div>
           {/* Animated services grid */}
           <motion.div
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4"
@@ -420,20 +445,20 @@ export default function Home() {
                 className="w-full"
               >
                 <div
-                  className="group cursor-pointer transition-all duration-200 hover:shadow-lg bg-white border-0 shadow-sm hover:border-blue-400 rounded-xl"
+                  className="group cursor-pointer transition-all duration-200 hover:shadow-lg bg-black/60 border-0 shadow-sm hover:border-yellow-400 rounded-xl"
                 >
                   <div className="p-6 h-full flex flex-col">
-                    <div className="text-xs font-medium text-blue-600 uppercase tracking-wide mb-3">
+                    <div className="text-xs font-medium text-yellow-400 uppercase tracking-wide mb-3">
                       {service.category}
                     </div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-3 leading-tight group-hover:text-blue-700 transition-colors duration-200">
+                    <h3 className="text-xl font-semibold text-white mb-3 leading-tight group-hover:text-yellow-400 transition-colors duration-200">
                       {service.title}
                     </h3>
-                    <p className="text-gray-600 text-sm leading-relaxed mb-6">
+                    <p className="text-gray-200 text-sm leading-relaxed mb-6">
                       {service.description}
                     </p>
                     <div className="flex items-center justify-end">
-                      <ArrowRight className="w-5 h-5 text-blue-400 group-hover:text-blue-700 group-hover:translate-x-1 transition-all duration-200" />
+                      <ArrowRight className="w-5 h-5 text-yellow-400 group-hover:text-yellow-500 group-hover:translate-x-1 transition-all duration-200" />
                     </div>
                   </div>
                 </div>
@@ -447,7 +472,7 @@ export default function Home() {
       <SectionDivider />
 
       {/* Work Done Section */}
-      <section id="workdone" className="relative w-full flex flex-col items-center justify-center px-0 py-0 bg-white overflow-hidden" style={{marginTop: 0, paddingTop: 0}}>
+      <section id="workdone" className="relative w-full flex flex-col items-center justify-center px-0 py-0 bg-black overflow-hidden" style={{marginTop: 0, paddingTop: 0}}>
         {/* Blurred video background, matching services section */}
         <div className="absolute inset-0 w-full h-full z-0">
           <video
@@ -459,24 +484,24 @@ export default function Home() {
             className="object-cover w-full h-full"
             style={{ filter: 'blur(16px) brightness(1.2) saturate(1.2)' }}
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-white/70 via-yellow-100/80 to-yellow-200/60 mix-blend-lighten" />
+          <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/70 via-white/80 to-black/80 mix-blend-lighten" />
         </div>
         <div className="relative z-10 w-full max-w-7xl mx-auto py-16">
           {/* Header with filter and search */}
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12 gap-6 px-4">
-            <h2 className="text-4xl font-bold text-center md:text-left text-black">Explore our work</h2>
+            <h2 className="text-4xl font-bold text-center md:text-left text-yellow-400 drop-shadow-lg">Explore our work</h2>
             <div className="flex flex-col md:flex-row md:items-center gap-4 w-full md:w-auto justify-center">
-              <button className="flex items-center gap-2 border border-gray-300 rounded-full px-5 py-2 bg-white hover:bg-blue-50 text-gray-800 font-medium shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400">
-                <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 6h18M6 6v12m12-12v12M6 18h12" /></svg>
+              <button className="flex items-center gap-2 border border-yellow-300 rounded-full px-5 py-2 bg-white hover:bg-yellow-50 text-gray-800 font-medium shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                <svg className="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M3 6h18M6 6v12m12-12v12M6 18h12" /></svg>
                 Filter by category
               </button>
-              <div className="flex items-center border-b border-gray-300 bg-white rounded-full px-3 py-2 w-full md:w-72">
-                <svg className="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" strokeLinecap="round" /></svg>
+              <div className="flex items-center border-b border-yellow-300 bg-white rounded-full px-3 py-2 w-full md:w-72">
+                <svg className="w-5 h-5 text-yellow-500 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" strokeLinecap="round" /></svg>
                 <input type="text" placeholder="Search by project or category" className="bg-transparent outline-none w-full text-gray-700 placeholder-gray-500" />
               </div>
             </div>
           </div>
-          <div className="text-gray-700 text-sm mb-6 px-4">Displaying 1-{workDone.length} ({workDone.length})</div>
+          <div className="text-gray-200 text-sm mb-6 px-4">Displaying 1-{workDone.length} ({workDone.length})</div>
           {/* Animated work done grid */}
           <motion.div
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4"
@@ -501,21 +526,21 @@ export default function Home() {
                 viewport={{ once: false, amount: 0.3 }}
                 className="w-full"
               >
-                <div className="group cursor-pointer transition-all duration-200 hover:shadow-lg bg-gray-100 shadow-sm hover:border-blue-400 rounded-xl flex flex-col h-full">
+                <div className="group cursor-pointer transition-all duration-200 hover:shadow-lg bg-black/60 shadow-sm hover:border-yellow-400 rounded-xl flex flex-col h-full">
                   <img
                     src={project.image}
                     alt={project.title}
                     className="w-full h-48 object-cover rounded-t-xl mb-4"
                   />
                   <div className="p-6 flex-1 flex flex-col">
-                    <div className="text-xs font-medium text-blue-600 uppercase tracking-wide mb-2">{project.category}</div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2 leading-tight group-hover:text-blue-700 transition-colors duration-200">{project.title}</h3>
+                    <div className="text-xs font-medium text-yellow-400 uppercase tracking-wide mb-2">{project.category}</div>
+                    <h3 className="text-xl font-semibold text-white mb-2 leading-tight group-hover:text-yellow-400 transition-colors duration-200">{project.title}</h3>
                     {project.desc.map((d, idx) => (
-                      <p key={idx} className="text-gray-600 text-sm leading-relaxed mb-2">{d}</p>
+                      <p key={idx} className="text-gray-200 text-sm leading-relaxed mb-2">{d}</p>
                     ))}
                   </div>
                   <div className="flex items-center justify-end px-6 pb-4">
-                    <ArrowRight className="w-5 h-5 text-blue-400 group-hover:text-blue-700 group-hover:translate-x-1 transition-all duration-200" />
+                    <ArrowRight className="w-5 h-5 text-yellow-400 group-hover:text-yellow-500 group-hover:translate-x-1 transition-all duration-200" />
                   </div>
                 </div>
               </motion.div>
@@ -581,7 +606,7 @@ export default function Home() {
             className="object-cover w-full h-full"
             style={{ filter: 'blur(16px) brightness(1.2) saturate(1.2)' }}
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-yellow-900/60 to-black/90 mix-blend-darken" />
+          <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/70 via-white/80 to-black/80 mix-blend-lighten" />
         </div>
         <div className="relative z-10 w-full max-w-4xl mx-auto py-24 flex flex-col items-center">
           <h2 className="text-4xl md:text-5xl font-bold text-center text-yellow-400 mb-20 drop-shadow-lg">Why Choose Us</h2>
@@ -611,16 +636,16 @@ export default function Home() {
                   stiffness: 60
                 }}
                 viewport={{ once: false, amount: 0.2 }}
-                className="backdrop-blur-xl bg-black/60 shadow-2xl px-10 py-8 mb-[-32px] rounded-3xl w-full max-w-2xl text-center relative border-none"
+                className="backdrop-blur-xl bg-white/10 shadow-2xl px-10 py-8 mb-[-32px] rounded-3xl w-full max-w-2xl text-center relative border-none"
                 style={{
                   zIndex: 10 - i,
                   boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.18)",
                   border: "none",
                   WebkitBackdropFilter: "blur(16px)",
-                  background: "linear-gradient(120deg, rgba(0,0,0,0.85) 60%, rgba(255,215,0,0.18) 100%)"
+                  background: "linear-gradient(120deg, rgba(255,255,255,0.10) 60%, rgba(255,215,0,0.18) 100%)"
                 }}
               >
-                <h3 className="text-2xl font-semibold text-yellow-400 mb-2 drop-shadow-sm">{point.title}</h3>
+                <h3 className="text-2xl font-semibold text-yellow-300 mb-2 drop-shadow-sm">{point.title}</h3>
                 <p className="text-white text-lg font-medium drop-shadow-sm">{point.desc}</p>
               </motion.div>
             ))}
@@ -676,12 +701,12 @@ export default function Home() {
         viewport={{ once: true, amount: 0.2 }}
         variants={sectionVariants}
       >
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">Meet the Team</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-yellow-400">Meet the Team</h2>
         <div className="flex flex-wrap justify-center gap-8">
           {team.map((member, i) => (
             <motion.div
               key={member.name}
-              className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6 flex flex-col items-center w-64 hover:scale-105 transition-transform border border-transparent hover:border-red-400"
+              className="bg-black/60 rounded-xl shadow-lg p-6 flex flex-col items-center w-64 hover:scale-105 transition-transform border border-transparent hover:border-yellow-400"
               whileHover={{ scale: 1.07 }}
               initial="hidden"
               whileInView="visible"
@@ -691,10 +716,10 @@ export default function Home() {
               <img
                 src={member.img}
                 alt={member.name}
-                className="w-24 h-24 rounded-full mb-4 object-cover border-4 border-blue-600 shadow"
+                className="w-24 h-24 rounded-full mb-4 object-cover border-4 border-yellow-400 shadow"
               />
-              <h3 className="font-semibold text-lg mb-1">{member.name}</h3>
-              <p className="text-red-500 font-medium">{member.title}</p>
+              <h3 className="font-semibold text-lg mb-1 text-white">{member.name}</h3>
+              <p className="text-yellow-300 font-medium">{member.title}</p>
             </motion.div>
           ))}
         </div>
