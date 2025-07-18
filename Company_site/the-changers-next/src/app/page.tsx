@@ -220,35 +220,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground transition-colors duration-500">
-      {/* Sticky Navbar at the very top */}
-      <nav className="w-full flex justify-center md:justify-between items-center py-4 px-2 md:px-8 sticky top-0 z-50 bg-black/80 backdrop-blur-md shadow-lg">
-        <span className="text-lg md:text-2xl font-bold tracking-widest">IGNYSIS</span>
-        <ul className="hidden md:flex gap-8 text-base font-medium">
-          <li><a href="#hero" className="hover:text-accent transition-colors">Home</a></li>
-          <li className="relative" onMouseEnter={() => setSolutionsOpen(true)} onMouseLeave={() => setSolutionsOpen(false)}>
-            <button className="hover:text-accent transition-colors flex items-center gap-1">Explore our solutions <ChevronDown className="w-4 h-4" /></button>
-            {solutionsOpen && (
-              <div className="absolute left-0 mt-2 w-64 bg-white text-black rounded-xl shadow-xl py-2 z-50">
-                {services.map((service, idx) => (
-                  <a key={idx} href="#services" className="block px-5 py-2 hover:bg-blue-50 text-sm font-medium">{service.title}</a>
-                ))}
-              </div>
-            )}
-          </li>
-          <li className="relative" onMouseEnter={() => setWorkOpen(true)} onMouseLeave={() => setWorkOpen(false)}>
-            <button className="hover:text-accent transition-colors flex items-center gap-1">Explore our work <ChevronDown className="w-4 h-4" /></button>
-            {workOpen && (
-              <div className="absolute left-0 mt-2 w-72 bg-white text-black rounded-xl shadow-xl py-2 z-50">
-                {workDone.map((work, idx) => (
-                  <a key={idx} href="#workdone" className="block px-5 py-2 hover:bg-blue-50 text-sm font-medium">{work.title}</a>
-                ))}
-              </div>
-            )}
-          </li>
-          <li><a href="#team" className="hover:text-accent transition-colors">Team</a></li>
-          <li><a href="#contact" className="hover:text-accent transition-colors">Contact</a></li>
-        </ul>
-      </nav>
+      {/* Remove the sticky navbar here, as it is now globally rendered in layout.tsx */}
 
       {/* Hero Section */}
       <section id="hero" className="min-h-screen relative p-0 m-0" ref={heroRef}>
