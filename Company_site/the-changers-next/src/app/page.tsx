@@ -742,7 +742,7 @@ export default function Home() {
       <TrustedBySection />
 
       {/* AI Analytics FAQ Section */}
-      <section id="ai-analytics-faq" className="w-full min-h-screen bg-gray-900/90 py-20 px-4 flex flex-col items-center justify-center">
+      <section id="ai-analytics-faq" className="w-full min-h-screen bg-black py-20 px-4 flex flex-col items-center justify-center">
         <div className="max-w-5xl w-full mx-auto">
           {/* AI Analytics Dashboard */}
           <div className="mb-16">
@@ -761,7 +761,7 @@ export default function Home() {
                 ))}
               </div>
             </div>
-            <div className="bg-gray-900/80 rounded-3xl border-2 border-yellow-400 p-8 h-[36rem] relative overflow-hidden shadow-2xl flex items-center justify-center">
+            <div className="max-w-5xl w-full mx-auto bg-black rounded-3xl border-2 border-yellow-400 p-8 h-[36rem] relative overflow-hidden shadow-2xl flex items-center justify-center">
               <ResponsiveContainer width="100%" height="100%">
                 {chartElement || <div />}
               </ResponsiveContainer>
@@ -806,28 +806,49 @@ export default function Home() {
         `}</style>
       </section>
 
-      {/* Final Call to Action / Contact */}
-      <motion.section
-        id="contact"
-        className="py-20 px-4 text-center bg-gradient-to-r from-blue-600 via-red-500 to-blue-400 dark:from-blue-900 dark:via-red-900 dark:to-blue-900 text-white"
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.7 }}
-      >
-        <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Transform with AI?</h2>
-        <p className="mb-8 text-lg max-w-2xl mx-auto">
-          Contact us today to discuss your project or schedule a free consultation with our experts.
-        </p>
-        <a
-          href="mailto:contact@thechangers.ai"
-          className="inline-block px-8 py-4 rounded-full bg-white text-blue-600 font-bold text-lg shadow-lg hover:bg-red-500 hover:text-white transition-all duration-300"
-        >
-          Reach Out
-        </a>
-      </motion.section>
-      <footer className="w-full py-2 text-center text-xs text-gray-500 dark:text-gray-400 bg-transparent mt-4">
-        &copy; {new Date().getFullYear()} Ignysis. All rights reserved.
+      {/* Modern Multi-Column Footer */}
+      <footer className="w-full bg-black text-white py-10 px-4 mt-0 border-t border-gray-800">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-8 items-start">
+          {/* Newsletter */}
+          <div className="md:col-span-2 flex flex-col gap-4">
+            <h4 className="text-lg font-bold mb-2 text-yellow-400">Stay Up to Date</h4>
+            <p className="text-gray-300 text-sm mb-2">Get the latest on AI analytics, platform updates, and exclusive offers.</p>
+            <form className="flex w-full max-w-xs">
+              <input type="email" placeholder="Email address" className="flex-1 px-4 py-2 rounded-l-lg bg-gray-800 text-white border border-gray-700 focus:outline-none" />
+              <button type="submit" className="px-4 py-2 bg-yellow-400 text-black font-bold rounded-r-lg hover:bg-yellow-300 transition">Sign Up</button>
+            </form>
+          </div>
+          {/* Product */}
+          <div className="flex flex-col gap-2">
+            <h4 className="text-lg font-bold mb-2 text-yellow-400">Product</h4>
+            <a href="#services" className="text-gray-300 hover:text-yellow-400 transition">AI Solutions</a>
+            <a href="#ai-analytics-faq" className="text-gray-300 hover:text-yellow-400 transition">Analytics Dashboard</a>
+            <a href="#workdone" className="text-gray-300 hover:text-yellow-400 transition">Case Studies</a>
+            <a href="#contact" className="text-gray-300 hover:text-yellow-400 transition">Contact</a>
+          </div>
+          {/* Company */}
+          <div className="flex flex-col gap-2">
+            <h4 className="text-lg font-bold mb-2 text-yellow-400">Company</h4>
+            <a href="#whychoose" className="text-gray-300 hover:text-yellow-400 transition">Why IGNYSYS</a>
+            <a href="#trusted-by" className="text-gray-300 hover:text-yellow-400 transition">Trusted By</a>
+            <a href="#faq" className="text-gray-300 hover:text-yellow-400 transition">FAQ</a>
+          </div>
+          {/* Resources */}
+          <div className="flex flex-col gap-2">
+            <h4 className="text-lg font-bold mb-2 text-yellow-400">Resources</h4>
+            <a href="#ai-analytics-faq" className="text-gray-300 hover:text-yellow-400 transition">Documentation</a>
+            <a href="mailto:contact@thechangers.ai" className="text-gray-300 hover:text-yellow-400 transition">Support</a>
+            <a href="#" className="text-gray-300 hover:text-yellow-400 transition">Blog</a>
+          </div>
+          {/* Social */}
+          <div className="flex flex-col gap-2">
+            <h4 className="text-lg font-bold mb-2 text-yellow-400">Connect</h4>
+            <a href="https://twitter.com/" target="_blank" rel="noopener" className="text-gray-300 hover:text-yellow-400 transition">Twitter (X)</a>
+            <a href="https://discord.com/" target="_blank" rel="noopener" className="text-gray-300 hover:text-yellow-400 transition">Discord</a>
+            <a href="https://github.com/Kamuyu-cyber/Ignysis_site" target="_blank" rel="noopener" className="text-gray-300 hover:text-yellow-400 transition">GitHub</a>
+          </div>
+        </div>
+        <div className="text-center text-xs text-gray-500 mt-10">&copy; {new Date().getFullYear()} IGNYSYS. All rights reserved.</div>
       </footer>
     </div>
   );
