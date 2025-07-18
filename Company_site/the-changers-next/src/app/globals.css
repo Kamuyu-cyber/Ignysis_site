@@ -34,3 +34,5 @@ body {
 .animate-ignysis-marquee {
   animation: ignysis-marquee 18s linear infinite;
 }
+
+html { scroll-behavior: smooth; }

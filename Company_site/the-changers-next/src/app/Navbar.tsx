@@ -1,3 +1,5 @@
+'use client';
+
 import { ChevronDown } from "lucide-react";
 import React, { useState } from "react";
 
@@ -20,9 +22,9 @@ export default function Navbar() {
   const [solutionsOpen, setSolutionsOpen] = useState(false);
   const [workOpen, setWorkOpen] = useState(false);
   return (
-    <nav className="w-full flex justify-center md:justify-between items-center py-4 px-2 md:px-8 sticky top-0 z-50 bg-black/80 backdrop-blur-md shadow-lg">
-      <span className="text-lg md:text-2xl font-bold tracking-widest">IGNYSIS</span>
-      <ul className="hidden md:flex gap-8 text-base font-medium">
+    <nav className="w-full flex justify-center md:justify-between items-center py-3 px-2 md:px-8 sticky top-0 z-50 bg-transparent shadow-md border-b border-white/10">
+      <span className="text-base md:text-lg font-bold tracking-widest text-white">IGNYSIS</span>
+      <ul className="hidden md:flex gap-6 text-sm font-normal text-white">
         <li><a href="/" className="hover:text-accent transition-colors">Home</a></li>
         <li className="relative" onMouseEnter={() => setSolutionsOpen(true)} onMouseLeave={() => setSolutionsOpen(false)}>
           <button className="hover:text-accent transition-colors flex items-center gap-1">Explore our solutions <ChevronDown className="w-4 h-4" /></button>
@@ -44,7 +46,6 @@ export default function Navbar() {
             </div>
           )}
         </li>
-        <li><a href="/#team" className="hover:text-accent transition-colors">Team</a></li>
         <li><a href="/#contact" className="hover:text-accent transition-colors">Contact</a></li>
         <li><a href="/trusted-by" className="hover:text-accent transition-colors">Trusted By</a></li>
       </ul>

@@ -11,6 +11,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SectionDivider from "./SectionDivider";
 import UsageChart from "./UsageChart";
+import { BarChart3, Hexagon, Users } from "lucide-react";
+import { LineChart, Line, BarChart, Bar, AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 
 const team = [
   { name: "Cheruiyot Elkanah", title: "CEO", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=ceo&backgroundColor=blue,red,white&accessoriesProbability=100" },
@@ -217,6 +219,113 @@ export default function Home() {
     });
   }, []);
 
+  const [activeTab, setActiveTab] = useState("AI Usage");
+
+  // Live data for each chart type
+  const [aiUsageData, setAiUsageData] = useState([
+    { name: 'Jan', value: 1200 },
+    { name: 'Feb', value: 1500 },
+    { name: 'Mar', value: 1700 },
+    { name: 'Apr', value: 1400 },
+    { name: 'May', value: 2100 },
+    { name: 'Jun', value: 1800 },
+    { name: 'Jul', value: 2200 },
+    { name: 'Aug', value: 2000 },
+    { name: 'Sep', value: 2300 },
+    { name: 'Oct', value: 2500 },
+    { name: 'Nov', value: 2400 },
+    { name: 'Dec', value: 2600 },
+  ]);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAiUsageData((prev) => {
+        const next = prev.slice(1).concat({
+          name: prev[prev.length - 1].name,
+          value: Math.max(1000, Math.round(prev[prev.length - 1].value + (Math.random() - 0.5) * 300)),
+        });
+        return next;
+      });
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const [modelInsightsData, setModelInsightsData] = useState([
+    { name: 'Model A', value: 400 },
+    { name: 'Model B', value: 300 },
+    { name: 'Model C', value: 200 },
+    { name: 'Model D', value: 278 },
+    { name: 'Model E', value: 189 },
+  ]);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setModelInsightsData((prev) => prev.map(d => ({ ...d, value: Math.max(100, d.value + Math.round((Math.random() - 0.5) * 40)) })));
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
+
+  const [userStatsData, setUserStatsData] = useState([
+    { name: 'Week 1', value: 300 },
+    { name: 'Week 2', value: 500 },
+    { name: 'Week 3', value: 700 },
+    { name: 'Week 4', value: 600 },
+    { name: 'Week 5', value: 800 },
+    { name: 'Week 6', value: 900 },
+  ]);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setUserStatsData((prev) => prev.map(d => ({ ...d, value: Math.max(100, d.value + Math.round((Math.random() - 0.5) * 30)) })));
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // FAQ data and open state
+  const faqs = [
+    { q: "How does Ignysis use AI?", a: "We leverage AI to deliver scalable, real-world solutions for businesses and organizations." },
+    { q: "What analytics do you provide?", a: "We provide live usage, model insights, and user engagement analytics for all our AI services." },
+    { q: "Is my data secure?", a: "Yes, we follow best practices in data privacy and security." },
+    { q: "Can I integrate Ignysis AI with my platform?", a: "Absolutely! Our APIs and solutions are designed for easy integration." }
+  ];
+  const [open, setOpen] = useState<number | null>(null);
+
+  let chartElement = null;
+  if (activeTab === "AI Usage") {
+    chartElement = (
+      <LineChart data={aiUsageData || []} margin={{ top: 30, right: 40, left: 0, bottom: 0 }}>
+        <CartesianGrid stroke="#FFD70033" strokeDasharray="3 3" />
+        <XAxis dataKey="name" stroke="#06b6d4" fontSize={14} tickLine={false} axisLine={{ stroke: '#FFD700' }} />
+        <YAxis stroke="#06b6d4" fontSize={14} tickLine={false} axisLine={{ stroke: '#FFD700' }} />
+        <Tooltip contentStyle={{ background: '#222', color: '#FFD700', borderRadius: 12, border: 'none', fontSize: 15, boxShadow: '0 4px 24px #FFD70022' }} />
+        <Line type="monotone" dataKey="value" stroke="#FFD700" strokeWidth={3} dot={{ r: 4, fill: '#06b6d4', stroke: '#fff', strokeWidth: 2 }} isAnimationActive={true} />
+      </LineChart>
+    );
+  } else if (activeTab === "Model Insights") {
+    chartElement = (
+      <BarChart data={modelInsightsData || []} margin={{ top: 30, right: 40, left: 0, bottom: 0 }}>
+        <CartesianGrid stroke="#FFD70033" strokeDasharray="3 3" />
+        <XAxis dataKey="name" stroke="#06b6d4" fontSize={14} tickLine={false} axisLine={{ stroke: '#FFD700' }} />
+        <YAxis stroke="#06b6d4" fontSize={14} tickLine={false} axisLine={{ stroke: '#FFD700' }} />
+        <Tooltip contentStyle={{ background: '#222', color: '#FFD700', borderRadius: 12, border: 'none', fontSize: 15, boxShadow: '0 4px 24px #FFD70022' }} />
+        <Bar dataKey="value" fill="#FFD700" radius={[8, 8, 0, 0]} isAnimationActive={true} />
+      </BarChart>
+    );
+  } else if (activeTab === "User Stats") {
+    chartElement = (
+      <AreaChart data={userStatsData || []} margin={{ top: 30, right: 40, left: 0, bottom: 0 }}>
+        <defs>
+          <linearGradient id="userStatsGradient" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="5%" stopColor="#06b6d4" stopOpacity={0.4}/>
+            <stop offset="95%" stopColor="#FFD700" stopOpacity={0.1}/>
+          </linearGradient>
+        </defs>
+        <CartesianGrid stroke="#FFD70033" strokeDasharray="3 3" />
+        <XAxis dataKey="name" stroke="#06b6d4" fontSize={14} tickLine={false} axisLine={{ stroke: '#FFD700' }} />
+        <YAxis stroke="#06b6d4" fontSize={14} tickLine={false} axisLine={{ stroke: '#FFD700' }} />
+        <Tooltip contentStyle={{ background: '#222', color: '#FFD700', borderRadius: 12, border: 'none', fontSize: 15, boxShadow: '0 4px 24px #FFD70022' }} />
+        <Area type="monotone" dataKey="value" stroke="#06b6d4" fill="url(#userStatsGradient)" strokeWidth={3} isAnimationActive={true} />
+      </AreaChart>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background text-foreground transition-colors duration-500">
       {/* Remove the sticky navbar here, as it is now globally rendered in layout.tsx */}
@@ -239,7 +348,7 @@ export default function Home() {
                     className="px-6 py-1 text-base font-extrabold tracking-widest uppercase text-white drop-shadow-lg"
                     style={{ letterSpacing: '0.2em' }}
                   >
-                    IGNYsis
+                    IGNYSYS
                   </span>
                 ))}
               </div>
@@ -291,7 +400,7 @@ export default function Home() {
                 >
                   I
                 </motion.span>
-                {['G', 'N', 'Y', 's', 'i', 's'].map((char, i) => (
+                {['G', 'N', 'Y', 's', 'y', 's'].map((char, i) => (
                   <motion.span
                     key={char + i}
                     variants={{
@@ -364,7 +473,7 @@ export default function Home() {
         {/* Blurred video background */}
         <div className="absolute inset-0 w-full h-full z-0">
           <video
-            src="/2.mp4"
+            src="/3.mp4"
             autoPlay
             loop
             muted
@@ -447,7 +556,7 @@ export default function Home() {
         {/* Blurred video background, matching services section */}
         <div className="absolute inset-0 w-full h-full z-0">
           <video
-            src="/2.mp4"
+            src="/3.mp4"
             autoPlay
             loop
             muted
@@ -569,7 +678,7 @@ export default function Home() {
         {/* Blurred video background, matching 'Explore our work' */}
         <div className="absolute inset-0 w-full h-full z-0">
           <video
-            src="/2.mp4"
+            src="/3.mp4"
             autoPlay
             loop
             muted
@@ -580,8 +689,12 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/70 via-white/80 to-black/80 mix-blend-lighten" />
         </div>
         <div className="relative z-10 w-full max-w-4xl mx-auto py-24 flex flex-col items-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-center text-yellow-400 mb-20 drop-shadow-lg">Why Choose Us</h2>
-          {/* 3D staircase glassmorphism cards with framer-motion */}
+          <h2
+            className="text-5xl md:text-6xl font-bold text-center mb-16"
+            style={{ color: '#d4af37' }}
+          >
+            Why Choose Us
+          </h2>
           <div className="flex flex-col items-center w-full" style={{ perspective: 1600 }}>
             {whyChoose.map((point, i) => (
               <motion.div
@@ -607,17 +720,20 @@ export default function Home() {
                   stiffness: 60
                 }}
                 viewport={{ once: false, amount: 0.2 }}
-                className="backdrop-blur-xl bg-white/10 shadow-2xl px-10 py-8 mb-[-32px] rounded-3xl w-full max-w-2xl text-center relative border-none"
+                className="bg-black/40 backdrop-blur-sm rounded-2xl p-8 border border-white/10 w-full max-w-2xl text-center relative mb-[-32px]"
                 style={{
                   zIndex: 10 - i,
                   boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.18)",
-                  border: "none",
-                  WebkitBackdropFilter: "blur(16px)",
-                  background: "linear-gradient(120deg, rgba(255,255,255,0.10) 60%, rgba(255,215,0,0.18) 100%)"
+                  WebkitBackdropFilter: "blur(16px)"
                 }}
               >
-                <h3 className="text-2xl font-semibold text-yellow-300 mb-2 drop-shadow-sm">{point.title}</h3>
-                <p className="text-white text-lg font-medium drop-shadow-sm">{point.desc}</p>
+                <h3
+                  className="text-2xl font-semibold mb-4"
+                  style={{ color: '#d4af37' }}
+                >
+                  {point.title}
+                </h3>
+                <p className="text-white/90 text-lg leading-relaxed">{point.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -627,57 +743,69 @@ export default function Home() {
       {/* Trusted By */}
       <TrustedBySection />
 
-      {/* Meet the Team */}
-      <motion.section
-        id="team"
-        className="py-16 px-4 max-w-6xl mx-auto"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionVariants}
-      >
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-yellow-400">Meet the Team</h2>
-        <div className="flex flex-wrap justify-center gap-8">
-          {team.map((member, i) => (
-            <motion.div
-              key={member.name}
-              className="bg-black/60 rounded-xl shadow-lg p-6 flex flex-col items-center w-64 hover:scale-105 transition-transform border border-transparent hover:border-yellow-400"
-              whileHover={{ scale: 1.07 }}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={sectionVariants}
-            >
-              <img
-                src={member.img}
-                alt={member.name}
-                className="w-24 h-24 rounded-full mb-4 object-cover border-4 border-yellow-400 shadow"
-              />
-              <h3 className="font-semibold text-lg mb-1 text-white">{member.name}</h3>
-              <p className="text-yellow-300 font-medium">{member.title}</p>
-            </motion.div>
-          ))}
+      {/* AI Analytics FAQ Section */}
+      <section id="ai-analytics-faq" className="w-full min-h-screen bg-gray-900/90 py-20 px-4 flex flex-col items-center justify-center">
+        <div className="max-w-5xl w-full mx-auto">
+          {/* AI Analytics Dashboard */}
+          <div className="mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-center mb-8 text-cyan-400 drop-shadow-lg">Ignysis AI Analytics Dashboard</h2>
+            <div className="flex justify-center mb-8">
+              <div className="flex bg-gray-800/50 rounded-lg p-1 backdrop-blur-sm border border-gray-700">
+                {[{ name: "AI Usage", icon: BarChart3 }, { name: "Model Insights", icon: Hexagon }, { name: "User Stats", icon: Users }].map((tab) => (
+                  <button
+                    key={tab.name}
+                    onClick={() => setActiveTab(tab.name)}
+                    className={`flex items-center gap-2 px-6 py-3 rounded-md transition-all duration-300 ${activeTab === tab.name ? "bg-gray-700 text-white" : "text-gray-400 hover:text-white"}`}
+                  >
+                    <tab.icon size={16} />
+                    {tab.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="bg-gray-900/80 rounded-3xl border-2 border-yellow-400 p-8 h-[36rem] relative overflow-hidden shadow-2xl flex items-center justify-center">
+              <ResponsiveContainer width="100%" height="100%">
+                {chartElement}
+              </ResponsiveContainer>
+            </div>
+            <div className="text-center mt-6 text-cyan-300 text-lg font-semibold">
+              {activeTab === "AI Usage" && "Live AI Service Usage Across Our Platform"}
+              {activeTab === "Model Insights" && "Insights from Our Latest AI Models"}
+              {activeTab === "User Stats" && "User Engagement & Growth Analytics"}
+            </div>
+          </div>
+          {/* FAQ Section */}
+          <div className="bg-gray-800/40 rounded-2xl p-8 border border-gray-700 max-w-3xl mx-auto">
+            <h3 className="text-2xl font-bold text-cyan-400 mb-6 text-center">Frequently Asked Questions</h3>
+            <div className="space-y-4">
+              {faqs.map((faq, i) => (
+                <div key={i} className="border border-gray-700 rounded-lg overflow-hidden">
+                  <button
+                    className="w-full text-left px-6 py-4 bg-gray-900 font-semibold focus:outline-none focus:bg-cyan-900/30 transition-colors text-cyan-200"
+                    onClick={() => setOpen(open === i ? null : i)}
+                    aria-expanded={open === i}
+                    aria-controls={`faq-panel-${i}`}
+                  >
+                    {faq.q}
+                  </button>
+                  <div
+                    id={`faq-panel-${i}`}
+                    className={`px-6 py-4 text-cyan-100 text-sm bg-gray-900 transition-all duration-300 ${open === i ? 'block' : 'hidden'}`}
+                  >
+                    {faq.a}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-      </motion.section>
-
-      {/* Frequently Asked Questions */}
-      <motion.section
-        id="faq"
-        className="py-16 px-4 max-w-3xl mx-auto"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionVariants}
-      >
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">Frequently Asked Questions</h2>
-        <FAQAccordion />
-      </motion.section>
-
-      {/* Usage Chart Section */}
-      <section id="usage" className="flex flex-col items-center justify-center py-10 px-4 md:px-0">
-        <h2 className="text-2xl md:text-3xl font-bold mb-4 accent">Live Service Usage</h2>
-        <UsageChart dark={dark} />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">* Chart updates live to show how people use our services</p>
+        <style jsx>{`
+          @keyframes flow {
+            0% { opacity: 0.3; transform: scaleY(0.8); }
+            50% { opacity: 0.8; transform: scaleY(1.1); }
+            100% { opacity: 0.3; transform: scaleY(0.8); }
+          }
+        `}</style>
       </section>
 
       {/* Final Call to Action / Contact */}
@@ -703,54 +831,6 @@ export default function Home() {
       <footer className="w-full py-2 text-center text-xs text-gray-500 dark:text-gray-400 bg-transparent mt-4">
         &copy; {new Date().getFullYear()} Ignysis. All rights reserved.
       </footer>
-      {/* Add smooth scrolling to the page */}
-      <style jsx global>{`
-        html { scroll-behavior: smooth; }
-      `}</style>
-    </div>
-  );
-}
-
-function FAQAccordion() {
-  const faqs = [
-    {
-      q: "What industries do you serve?",
-      a: "We work with clients in health, agriculture, public sector, finance, and more—anywhere AI can make a difference."
-    },
-    {
-      q: "Do you offer custom AI solutions?",
-      a: "Yes! We design, build, and deploy AI systems tailored to your unique business needs."
-    },
-    {
-      q: "How do you ensure data privacy?",
-      a: "We follow best practices in data security and comply with all relevant regulations, including Kenya’s Data Protection Act."
-    },
-    {
-      q: "Can you integrate with our existing systems?",
-      a: "Absolutely. Our solutions are built for interoperability and seamless integration."
-    }
-  ];
-  const [open, setOpen] = React.useState<number | null>(null);
-  return (
-    <div className="space-y-4">
-      {faqs.map((faq, i) => (
-        <div key={i} className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-          <button
-            className="w-full text-left px-6 py-4 bg-gray-50 dark:bg-gray-800 font-semibold focus:outline-none focus:bg-blue-100 dark:focus:bg-blue-900 transition-colors"
-            onClick={() => setOpen(open === i ? null : i)}
-            aria-expanded={open === i}
-            aria-controls={`faq-panel-${i}`}
-          >
-            {faq.q}
-          </button>
-          <div
-            id={`faq-panel-${i}`}
-            className={`px-6 py-4 text-gray-700 dark:text-gray-300 text-sm bg-white dark:bg-gray-900 transition-all duration-300 ${open === i ? 'block' : 'hidden'}`}
-          >
-            {faq.a}
-          </div>
-        </div>
-      ))}
     </div>
   );
 }
@@ -790,8 +870,21 @@ function TrustedBySection() {
     { name: "Redis", src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" },
   ];
   return (
-    <section className="bg-gray-50 py-16 px-4 w-full">
-      <div className="max-w-7xl mx-auto text-center py-16 px-4 md:px-8">
+    <section className="relative min-h-screen w-full flex flex-col items-center justify-center px-0 py-0 overflow-hidden">
+      {/* Blurred video background, matching 'Why Choose Us' */}
+      <div className="absolute inset-0 w-full h-full z-0">
+        <video
+          src="/3.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="object-cover w-full h-full"
+          style={{ filter: 'blur(16px) brightness(1.2) saturate(1.2)' }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/70 via-white/80 to-black/80 mix-blend-lighten" />
+      </div>
+      <div className="relative z-10 max-w-7xl mx-auto text-center py-16 px-4 md:px-8 w-full">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 tracking-tight">
           Trusted Companies and Partners
         </h1>
