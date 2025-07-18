@@ -626,43 +626,7 @@ export default function Home() {
       </section>
 
       {/* Trusted By */}
-      <motion.section
-        id="trustedby"
-        className="py-16 px-4 max-w-6xl mx-auto"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionVariants}
-      >
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">Trusted By</h2>
-        <div className="relative w-full overflow-x-hidden">
-          <motion.div
-            className="flex gap-12 items-center whitespace-nowrap animate-scroll-x"
-            initial={{ x: 0 }}
-            animate={{ x: [0, -600] }}
-            transition={{ repeat: Infinity, duration: 18, ease: "linear" }}
-            style={{ minWidth: 'max-content' }}
-          >
-            {partners.concat(partners).map((partner, i) => (
-              <div key={i} className="flex flex-col items-center min-w-[160px] mx-2">
-                <img
-                  src={partner.logo}
-                  alt={partner.name}
-                  className="h-16 w-auto rounded bg-white/70 shadow p-2 object-contain border border-gray-200 dark:border-gray-700 mb-2"
-                  draggable={false}
-                  style={{ maxWidth: 120 }}
-                />
-                <span className="text-xs text-gray-700 dark:text-gray-300 text-center font-medium">
-                  {partner.name}
-                </span>
-                <span className="text-[10px] text-gray-500 dark:text-gray-400 text-center">
-                  {partner.desc}
-                </span>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </motion.section>
+      <TrustedBySection />
 
       {/* Meet the Team */}
       <motion.section
@@ -789,5 +753,132 @@ function FAQAccordion() {
         </div>
       ))}
     </div>
+  );
+}
+
+function TrustedBySection() {
+  return (
+    <section className="bg-gray-50 py-16 px-4">
+      <div className="max-w-6xl mx-auto text-center">
+        {/* Main heading */}
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 tracking-tight">
+          INDUSTRY-LEADING
+          <br />
+          NETWORK SUPPORT
+        </h1>
+        {/* Subheading */}
+        <p className="text-lg md:text-xl text-gray-600 mb-12">Codex powers real-time experiences for</p>
+        {/* Top row of company logos */}
+        <div className="flex flex-wrap justify-center items-center gap-8 mb-8">
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 bg-black rounded-full"></div>
+            <span className="text-lg font-medium">MoonPay</span>
+          </div>
+          <span className="text-2xl font-bold">TradingView</span>
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded"></div>
+            <span className="text-lg font-medium">rainbow</span>
+          </div>
+          <span className="text-2xl font-bold">0x</span>
+          <div className="flex items-center gap-2">
+            <span className="text-lg font-medium">MAGIC EDEN</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-xl font-bold">BullX</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-lg font-medium">BANANA GUN</span>
+          </div>
+        </div>
+        {/* Second row of company logos */}
+        <div className="flex flex-wrap justify-center items-center gap-8 mb-16">
+          <span className="text-lg font-medium">defi.app</span>
+          <span className="text-xl font-bold">fomo</span>
+          <span className="text-lg font-bold">ALF3</span>
+          <span className="text-lg font-medium">SLINGSHOT</span>
+          <span className="text-lg font-medium">vector</span>
+          <span className="text-lg font-medium">Defined</span>
+        </div>
+        {/* Grid of app icons */}
+        <div className="grid grid-cols-6 gap-4 max-w-2xl mx-auto">
+          {/* Row 1 */}
+          <div className="aspect-square bg-blue-900 rounded-lg flex items-center justify-center">
+            <Image src="/placeholder.svg?height=40&width=40" alt="App icon" width={40} height={40} className="invert" />
+          </div>
+          <div className="aspect-square bg-white rounded-lg flex items-center justify-center border">
+            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+          </div>
+          <div className="aspect-square bg-black rounded-lg flex items-center justify-center">
+            <div className="text-cyan-400 text-2xl font-bold">×</div>
+          </div>
+          <div className="aspect-square bg-green-800 rounded-lg flex items-center justify-center">
+            <div className="w-6 h-6 bg-white rounded"></div>
+          </div>
+          <div className="aspect-square bg-purple-100 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-purple-500 rounded-full"></div>
+          </div>
+          <div className="aspect-square bg-blue-600 rounded-lg flex items-center justify-center">
+            <div className="text-white text-xl font-bold">B</div>
+          </div>
+          {/* Row 2 */}
+          <div className="aspect-square bg-black rounded-lg flex items-center justify-center">
+            <div className="text-white text-xl font-bold">W</div>
+          </div>
+          <div className="aspect-square bg-pink-100 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-pink-400 rounded"></div>
+          </div>
+          <div className="aspect-square bg-cyan-400 rounded-lg flex items-center justify-center">
+            <div className="w-6 h-6 bg-white rounded"></div>
+          </div>
+          <div className="aspect-square bg-gray-700 rounded-lg flex items-center justify-center">
+            <div className="text-white text-xl">⌂</div>
+          </div>
+          <div className="aspect-square bg-blue-100 rounded-lg flex items-center justify-center">
+            <div className="text-blue-600 text-xl font-bold">R</div>
+          </div>
+          <div className="aspect-square bg-teal-500 rounded-lg flex items-center justify-center">
+            <div className="w-6 h-6 bg-white rounded"></div>
+          </div>
+          {/* Row 3 */}
+          <div className="aspect-square bg-yellow-500 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-black rounded-full"></div>
+          </div>
+          <div className="aspect-square bg-orange-400 rounded-lg flex items-center justify-center">
+            <div className="text-white text-xl font-bold">S</div>
+          </div>
+          <div className="aspect-square bg-blue-500 rounded-lg flex items-center justify-center">
+            <div className="w-6 h-6 bg-white rounded"></div>
+          </div>
+          <div className="aspect-square bg-cyan-300 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-orange-400 rounded-full"></div>
+          </div>
+          <div className="aspect-square bg-black rounded-lg flex items-center justify-center">
+            <div className="text-white text-xl">×</div>
+          </div>
+          <div className="aspect-square bg-cyan-300 rounded-lg flex items-center justify-center">
+            <div className="text-white text-xl font-bold">C</div>
+          </div>
+          {/* Row 4 */}
+          <div className="aspect-square bg-blue-600 rounded-lg flex items-center justify-center">
+            <div className="w-6 h-6 bg-white rounded"></div>
+          </div>
+          <div className="aspect-square bg-white rounded-lg flex items-center justify-center border">
+            <div className="w-8 h-8 bg-gray-300 rounded"></div>
+          </div>
+          <div className="aspect-square bg-black rounded-lg flex items-center justify-center">
+            <div className="w-6 h-6 bg-white rounded"></div>
+          </div>
+          <div className="aspect-square bg-blue-500 rounded-lg flex items-center justify-center">
+            <div className="w-6 h-6 bg-white rounded"></div>
+          </div>
+          <div className="aspect-square bg-white rounded-lg flex items-center justify-center border">
+            <div className="w-8 h-8 bg-gray-300 rounded"></div>
+          </div>
+          <div className="aspect-square bg-white rounded-lg flex items-center justify-center border">
+            <div className="w-8 h-8 bg-gray-300 rounded"></div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
