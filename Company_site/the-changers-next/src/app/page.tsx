@@ -2,10 +2,8 @@
 
 import React, { useState, useEffect, useRef } from "react"; // Consolidate imports
 import { ChevronDown } from "lucide-react";
-import Nature3DBackground from "./NeuralNetworkBackground";
 import { useInView } from "framer-motion";
 import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, MessageCircle, X } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -765,7 +763,7 @@ export default function Home() {
             </div>
             <div className="bg-gray-900/80 rounded-3xl border-2 border-yellow-400 p-8 h-[36rem] relative overflow-hidden shadow-2xl flex items-center justify-center">
               <ResponsiveContainer width="100%" height="100%">
-                {chartElement}
+                {chartElement || <div />}
               </ResponsiveContainer>
             </div>
             <div className="text-center mt-6 text-cyan-300 text-lg font-semibold">
