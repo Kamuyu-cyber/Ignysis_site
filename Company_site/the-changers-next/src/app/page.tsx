@@ -11,6 +11,128 @@ import SectionDivider from "./SectionDivider";
 import UsageChart from "./UsageChart";
 import { BarChart3, Hexagon, Users } from "lucide-react";
 import { LineChart, Line, BarChart, Bar, AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
+import About from "./About";
+import { Zap, Mail, Phone, MapPin, Twitter, Linkedin, Github } from "lucide-react";
+import Contact from "./Contact";
+
+function Footer() {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    element?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  return (
+    <footer className="w-full bg-black text-white py-10 px-4 mt-0 border-t border-gray-800">
+      <div className="max-w-7xl mx-auto px-6 py-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Company Info */}
+          <div className="lg:col-span-2">
+            <div className="flex items-center space-x-2 mb-6">
+              <div className="p-2 bg-yellow-400/20 rounded-lg animate-pulse-glow">
+                <Zap className="w-6 h-6 text-yellow-400" />
+              </div>
+              <span className="text-2xl font-bold">ignsys</span>
+            </div>
+            <p className="text-gray-300 mb-6 max-w-md leading-relaxed">
+              Empowering global companies with cutting-edge AI solutions that transform 
+              operations through real-time intelligence and predictive analytics.
+            </p>
+            <div className="flex space-x-4">
+              <a href="#" className="p-2 bg-white/10 hover:bg-white/20 rounded-lg cursor-pointer transition-colors">
+                <Twitter className="w-5 h-5 text-white" />
+              </a>
+              <a href="#" className="p-2 bg-white/10 hover:bg-white/20 rounded-lg cursor-pointer transition-colors">
+                <Linkedin className="w-5 h-5 text-white" />
+              </a>
+              <a href="#" className="p-2 bg-white/10 hover:bg-white/20 rounded-lg cursor-pointer transition-colors">
+                <Github className="w-5 h-5 text-white" />
+              </a>
+            </div>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h3 className="text-lg font-semibold mb-6 text-yellow-400">Quick Links</h3>
+            <nav className="space-y-3">
+              <button
+                onClick={() => scrollToSection("hero")}
+                className="block text-gray-300 hover:text-yellow-400 transition-colors"
+              >
+                Home
+              </button>
+              <button
+                onClick={() => scrollToSection("about")}
+                className="block text-gray-300 hover:text-yellow-400 transition-colors"
+              >
+                About
+              </button>
+              <button
+                onClick={() => scrollToSection("services")}
+                className="block text-gray-300 hover:text-yellow-400 transition-colors"
+              >
+                Services
+              </button>
+              <button
+                onClick={() => scrollToSection("workdone")}
+                className="block text-gray-300 hover:text-yellow-400 transition-colors"
+              >
+                Work
+              </button>
+              <button
+                onClick={() => scrollToSection("contact")}
+                className="block text-gray-300 hover:text-yellow-400 transition-colors"
+              >
+                Contact
+              </button>
+            </nav>
+          </div>
+
+          {/* Contact Info */}
+          <div>
+            <h3 className="text-lg font-semibold mb-6 text-yellow-400">Contact Info</h3>
+            <div className="space-y-4">
+              <div className="flex items-center space-x-3">
+                <Mail className="w-4 h-4 text-yellow-400" />
+                <span className="text-gray-300 text-sm">hello@ignsys.com</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Phone className="w-4 h-4 text-yellow-400" />
+                <span className="text-gray-300 text-sm">+1 (555) 123-4567</span>
+              </div>
+              <div className="flex items-start space-x-3">
+                <MapPin className="w-4 h-4 text-yellow-400 mt-1 flex-shrink-0" />
+                <span className="text-gray-300 text-sm">
+                  123 Innovation Drive<br />
+                  Tech Valley, CA 94000
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="border-t border-gray-700 mt-12 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <div className="text-sm text-gray-500">
+              © 2024 ignsys. All rights reserved.
+            </div>
+            <div className="flex space-x-6 text-sm">
+              <a href="#" className="text-gray-500 hover:text-yellow-400 transition-colors">
+                Privacy Policy
+              </a>
+              <a href="#" className="text-gray-500 hover:text-yellow-400 transition-colors">
+                Terms of Service
+              </a>
+              <a href="#" className="text-gray-500 hover:text-yellow-400 transition-colors">
+                Cookie Policy
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
 
 const team = [
   { name: "Cheruiyot Elkanah", title: "CEO", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=ceo&backgroundColor=blue,red,white&accessoriesProbability=100" },
@@ -466,6 +588,8 @@ export default function Home() {
         </div>
       </section>
 
+      <About />
+
       {/* Services We Offer Section */}
       <section id="services" className="relative min-h-screen w-full flex flex-col items-center justify-center px-0 py-0 bg-black overflow-hidden">
         {/* Blurred video background */}
@@ -477,10 +601,10 @@ export default function Home() {
             muted
             playsInline
             className="object-cover w-full h-full"
-            style={{ filter: 'blur(16px) brightness(1.2) saturate(1.2)' }}
+            style={{ filter: 'blur(20px) brightness(0.7) saturate(1.1)' }}
           />
-          {/* Gold/black/white gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/70 via-white/80 to-black/80 mix-blend-lighten" />
+          {/* Darker, more opaque gradient overlay for better contrast */}
+          <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-gray-900/90 to-black/95" />
         </div>
         <div className="relative z-10 w-full max-w-7xl mx-auto py-16">
           {/* Header with filter and search */}
@@ -550,7 +674,7 @@ export default function Home() {
       <SectionDivider />
 
       {/* Work Done Section */}
-      <section id="workdone" className="relative w-full flex flex-col items-center justify-center px-0 py-0 bg-black overflow-hidden" style={{marginTop: 0, paddingTop: 0}}>
+      <section id="workdone" className="relative min-h-screen w-full flex flex-col items-center justify-center px-0 py-0 bg-black overflow-hidden" style={{marginTop: 0, paddingTop: 0}}>
         {/* Blurred video background, matching services section */}
         <div className="absolute inset-0 w-full h-full z-0">
           <video
@@ -560,9 +684,9 @@ export default function Home() {
             muted
             playsInline
             className="object-cover w-full h-full"
-            style={{ filter: 'blur(16px) brightness(1.2) saturate(1.2)' }}
+            style={{ filter: 'blur(20px) brightness(0.7) saturate(1.1)' }}
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/70 via-white/80 to-black/80 mix-blend-lighten" />
+          <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-gray-900/90 to-black/95" />
         </div>
         <div className="relative z-10 w-full max-w-7xl mx-auto py-16">
           {/* Header with filter and search */}
@@ -668,12 +792,9 @@ export default function Home() {
         </motion.div>
       )}
 
-      {/* Why Choose Us - 3D Animated Staircase */}
-      <section
-        id="whychoose"
-        className="relative min-h-screen w-full flex flex-col items-center justify-center px-0 py-0 overflow-hidden bg-black"
-      >
-        {/* Blurred video background, matching 'Explore our work' */}
+      {/* Why Choose Us Section */}
+      <section id="whychoose" className="relative min-h-screen w-full flex flex-col items-center justify-center px-0 py-0 overflow-hidden bg-black">
+        {/* Blurred video background, matching 'Why Choose Us' */}
         <div className="absolute inset-0 w-full h-full z-0">
           <video
             src="/3.mp4"
@@ -682,9 +803,9 @@ export default function Home() {
             muted
             playsInline
             className="object-cover w-full h-full"
-            style={{ filter: 'blur(16px) brightness(1.2) saturate(1.2)' }}
+            style={{ filter: 'blur(20px) brightness(0.7) saturate(1.1)' }}
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/70 via-white/80 to-black/80 mix-blend-lighten" />
+          <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-gray-900/90 to-black/95" />
         </div>
         <div className="relative z-10 w-full max-w-4xl mx-auto py-24 flex flex-col items-center">
           <h2
@@ -741,9 +862,25 @@ export default function Home() {
       {/* Trusted By */}
       <TrustedBySection />
 
+      {/* Contact Section */}
+      <Contact />
+
       {/* AI Analytics FAQ Section */}
-      <section id="ai-analytics-faq" className="w-full min-h-screen bg-black py-20 px-4 flex flex-col items-center justify-center">
-        <div className="max-w-5xl w-full mx-auto">
+      <section id="ai-analytics-faq" className="relative w-full min-h-screen flex flex-col items-center justify-center px-0 py-0 overflow-hidden bg-black">
+        {/* Blurred video background */}
+        <div className="absolute inset-0 w-full h-full z-0">
+          <video
+            src="/3.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="object-cover w-full h-full"
+            style={{ filter: 'blur(20px) brightness(0.7) saturate(1.1)' }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-gray-900/90 to-black/95" />
+        </div>
+        <div className="relative z-10 max-w-5xl w-full mx-auto py-20 px-4 flex flex-col items-center justify-center">
           {/* AI Analytics Dashboard */}
           <div className="mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-center mb-8 text-cyan-400 drop-shadow-lg">Ignysis AI Analytics Dashboard</h2>
@@ -761,7 +898,7 @@ export default function Home() {
                 ))}
               </div>
             </div>
-            <div className="max-w-5xl w-full mx-auto bg-black rounded-3xl border-2 border-yellow-400 p-8 h-[36rem] relative overflow-hidden shadow-2xl flex items-center justify-center">
+            <div className="w-screen h-[60vh] p-0 m-0 bg-black rounded-3xl border-2 border-yellow-400 relative overflow-hidden shadow-2xl flex items-center justify-center">
               <ResponsiveContainer width="100%" height="100%">
                 {chartElement || <div />}
               </ResponsiveContainer>
@@ -807,49 +944,7 @@ export default function Home() {
       </section>
 
       {/* Modern Multi-Column Footer */}
-      <footer className="w-full bg-black text-white py-10 px-4 mt-0 border-t border-gray-800">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-8 items-start">
-          {/* Newsletter */}
-          <div className="md:col-span-2 flex flex-col gap-4">
-            <h4 className="text-lg font-bold mb-2 text-yellow-400">Stay Up to Date</h4>
-            <p className="text-gray-300 text-sm mb-2">Get the latest on AI analytics, platform updates, and exclusive offers.</p>
-            <form className="flex w-full max-w-xs">
-              <input type="email" placeholder="Email address" className="flex-1 px-4 py-2 rounded-l-lg bg-gray-800 text-white border border-gray-700 focus:outline-none" />
-              <button type="submit" className="px-4 py-2 bg-yellow-400 text-black font-bold rounded-r-lg hover:bg-yellow-300 transition">Sign Up</button>
-            </form>
-          </div>
-          {/* Product */}
-          <div className="flex flex-col gap-2">
-            <h4 className="text-lg font-bold mb-2 text-yellow-400">Product</h4>
-            <a href="#services" className="text-gray-300 hover:text-yellow-400 transition">AI Solutions</a>
-            <a href="#ai-analytics-faq" className="text-gray-300 hover:text-yellow-400 transition">Analytics Dashboard</a>
-            <a href="#workdone" className="text-gray-300 hover:text-yellow-400 transition">Case Studies</a>
-            <a href="#contact" className="text-gray-300 hover:text-yellow-400 transition">Contact</a>
-          </div>
-          {/* Company */}
-          <div className="flex flex-col gap-2">
-            <h4 className="text-lg font-bold mb-2 text-yellow-400">Company</h4>
-            <a href="#whychoose" className="text-gray-300 hover:text-yellow-400 transition">Why IGNYSYS</a>
-            <a href="#trusted-by" className="text-gray-300 hover:text-yellow-400 transition">Trusted By</a>
-            <a href="#faq" className="text-gray-300 hover:text-yellow-400 transition">FAQ</a>
-          </div>
-          {/* Resources */}
-          <div className="flex flex-col gap-2">
-            <h4 className="text-lg font-bold mb-2 text-yellow-400">Resources</h4>
-            <a href="#ai-analytics-faq" className="text-gray-300 hover:text-yellow-400 transition">Documentation</a>
-            <a href="mailto:contact@thechangers.ai" className="text-gray-300 hover:text-yellow-400 transition">Support</a>
-            <a href="#" className="text-gray-300 hover:text-yellow-400 transition">Blog</a>
-          </div>
-          {/* Social */}
-          <div className="flex flex-col gap-2">
-            <h4 className="text-lg font-bold mb-2 text-yellow-400">Connect</h4>
-            <a href="https://twitter.com/" target="_blank" rel="noopener" className="text-gray-300 hover:text-yellow-400 transition">Twitter (X)</a>
-            <a href="https://discord.com/" target="_blank" rel="noopener" className="text-gray-300 hover:text-yellow-400 transition">Discord</a>
-            <a href="https://github.com/Kamuyu-cyber/Ignysis_site" target="_blank" rel="noopener" className="text-gray-300 hover:text-yellow-400 transition">GitHub</a>
-          </div>
-        </div>
-        <div className="text-center text-xs text-gray-500 mt-10">&copy; {new Date().getFullYear()} IGNYSYS. All rights reserved.</div>
-      </footer>
+      <Footer />
     </div>
   );
 }
@@ -890,7 +985,7 @@ function TrustedBySection() {
   ];
   return (
     <section className="relative min-h-screen w-full flex flex-col items-center justify-center px-0 py-0 overflow-hidden">
-      {/* Blurred video background, matching 'Why Choose Us' */}
+      {/* Blurred video background, matching new dark style */}
       <div className="absolute inset-0 w-full h-full z-0">
         <video
           src="/3.mp4"
@@ -899,15 +994,15 @@ function TrustedBySection() {
           muted
           playsInline
           className="object-cover w-full h-full"
-          style={{ filter: 'blur(16px) brightness(1.2) saturate(1.2)' }}
+          style={{ filter: 'blur(20px) brightness(0.7) saturate(1.1)' }}
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/70 via-white/80 to-black/80 mix-blend-lighten" />
+        <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-gray-900/90 to-black/95" />
       </div>
       <div className="relative z-10 max-w-7xl mx-auto text-center py-16 px-4 md:px-8 w-full">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 tracking-tight">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 tracking-tight">
           Trusted Companies and Partners
         </h1>
-        <p className="text-lg md:text-xl text-gray-600 mb-10">
+        <p className="text-lg md:text-xl text-gray-200 mb-10">
           These global and open-source leaders trust us for real-time network support.
         </p>
         {/* Animated logo grid */}
@@ -927,7 +1022,7 @@ function TrustedBySection() {
               className="flex flex-col items-center"
             >
               <img src={logo.src} alt={logo.name} className="h-14 w-14 object-contain mb-2" />
-              <span className="text-xs font-semibold text-gray-700">{logo.name}</span>
+              <span className="text-xs font-semibold text-gray-300">{logo.name}</span>
             </motion.div>
           ))}
         </div>

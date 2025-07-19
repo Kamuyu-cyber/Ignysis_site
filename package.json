@@ -1,6 +1,10 @@
 {
   "dependencies": {
     "gsap": "^3.13.0",
+    "lucide-react": "^0.525.0",
     "recharts": "^2.7.2"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.8"
   }
 }
