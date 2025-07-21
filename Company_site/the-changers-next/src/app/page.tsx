@@ -105,31 +105,12 @@ const services = [
   },
 ];
 
-const sectionVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
-};
-
 export default function Home() {
-  // Dark/light mode toggle
-  const [dark, setDark] = useState(false);
-  useEffect(() => {
-    if (dark) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [dark]);
-
   // Animation replay on hero in view
   const heroRef = React.useRef(null);
   const inView = useInView(heroRef, { amount: 0.5 });
 
   const [showChat, setShowChat] = useState(false);
-
-  // Add state for dropdowns
-  const [solutionsOpen, setSolutionsOpen] = useState(false);
-  const [workOpen, setWorkOpen] = useState(false);
 
   // Marquee GSAP logic (infinite stream)
   const marqueeRow = useRef<HTMLDivElement>(null);
@@ -593,7 +574,7 @@ export default function Home() {
                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="7" rx="2" /><path d="M8 11V7a4 4 0 1 1 8 0v4" /></svg>
               </div>
               <div className="text-sm">
-                <p>Hello! I'm your AI assistant. How can I help you today?</p>
+                <p>Hello! I&apos;m your AI assistant. How can I help you today?</p>
               </div>
             </div>
             <input
