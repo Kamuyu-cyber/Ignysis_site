@@ -26,6 +26,8 @@ export default function Navbar() {
       <span className="text-base md:text-lg font-bold tracking-widest text-white">IGNYSIS</span>
       <ul className="hidden md:flex gap-6 text-sm font-normal text-white">
         <li><a href="/" className="hover:text-accent transition-colors">Home</a></li>
+        <li><a href="/#about" className="hover:text-accent transition-colors">About</a></li>
+        <li><a href="/#contact" className="hover:text-accent transition-colors">Contact</a></li>
         <li className="relative" onMouseEnter={() => setSolutionsOpen(true)} onMouseLeave={() => setSolutionsOpen(false)}>
           <button className="hover:text-accent transition-colors flex items-center gap-1">Explore our solutions <ChevronDown className="w-4 h-4" /></button>
           {solutionsOpen && (

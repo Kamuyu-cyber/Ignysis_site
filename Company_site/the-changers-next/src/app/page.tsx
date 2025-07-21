@@ -11,6 +11,10 @@ import SectionDivider from "./SectionDivider";
 import UsageChart from "./UsageChart";
 import { BarChart3, Hexagon, Users } from "lucide-react";
 import { LineChart, Line, BarChart, Bar, AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
+import About from "./about/page";
+import FullWidthBorder from "./FullWidthBorder";
+import Contact from "./contact/page";
+import Footer from "./Footer";
 
 const team = [
   { name: "Cheruiyot Elkanah", title: "CEO", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=ceo&backgroundColor=blue,red,white&accessoriesProbability=100" },
@@ -248,11 +252,11 @@ export default function Home() {
   }, []);
 
   const [modelInsightsData, setModelInsightsData] = useState([
-    { name: 'Model A', value: 400 },
-    { name: 'Model B', value: 300 },
-    { name: 'Model C', value: 200 },
-    { name: 'Model D', value: 278 },
-    { name: 'Model E', value: 189 },
+    { name: 'QuantumLeap', value: 400 },
+    { name: 'Nova', value: 300 },
+    { name: 'Orion', value: 200 },
+    { name: 'Helios', value: 278 },
+    { name: 'Aura', value: 189 },
   ]);
   useEffect(() => {
     const interval = setInterval(() => {
@@ -377,7 +381,7 @@ export default function Home() {
               </p>
               {/* Main heading */}
               <motion.h1
-                className="text-5xl md:text-7xl lg:text-8xl font-serif mb-6 flex justify-center"
+                className="text-5xl md:text-7xl lg:text-8xl mb-6 flex justify-center"
                 initial="hidden"
                 animate={inView ? "visible" : "hidden"}
                 variants={{}}
@@ -466,6 +470,12 @@ export default function Home() {
         </div>
       </section>
 
+      <FullWidthBorder />
+
+      <About />
+
+      <FullWidthBorder />
+
       {/* Services We Offer Section */}
       <section id="services" className="relative min-h-screen w-full flex flex-col items-center justify-center px-0 py-0 bg-black overflow-hidden">
         {/* Blurred video background */}
@@ -477,10 +487,8 @@ export default function Home() {
             muted
             playsInline
             className="object-cover w-full h-full"
-            style={{ filter: 'blur(16px) brightness(1.2) saturate(1.2)' }}
           />
-          {/* Gold/black/white gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/70 via-white/80 to-black/80 mix-blend-lighten" />
+          <div className="absolute inset-0 bg-black/90" />
         </div>
         <div className="relative z-10 w-full max-w-7xl mx-auto py-16">
           {/* Header with filter and search */}
@@ -546,8 +554,12 @@ export default function Home() {
         </div>
       </section>
 
+      <FullWidthBorder />
+
       {/* Divider between Explore our Solutions and Explore our Work */}
       <SectionDivider />
+
+      <FullWidthBorder />
 
       {/* Work Done Section */}
       <section id="workdone" className="relative w-full flex flex-col items-center justify-center px-0 py-0 bg-black overflow-hidden" style={{marginTop: 0, paddingTop: 0}}>
@@ -560,9 +572,8 @@ export default function Home() {
             muted
             playsInline
             className="object-cover w-full h-full"
-            style={{ filter: 'blur(16px) brightness(1.2) saturate(1.2)' }}
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/70 via-white/80 to-black/80 mix-blend-lighten" />
+          <div className="absolute inset-0 bg-black/90" />
         </div>
         <div className="relative z-10 w-full max-w-7xl mx-auto py-16">
           {/* Header with filter and search */}
@@ -627,6 +638,8 @@ export default function Home() {
         </div>
       </section>
 
+      <FullWidthBorder />
+
       {/* Persistent AI Assistant Chat Button */}
       <button
         onClick={() => setShowChat(true)}
@@ -668,6 +681,8 @@ export default function Home() {
         </motion.div>
       )}
 
+      <FullWidthBorder />
+
       {/* Why Choose Us - 3D Animated Staircase */}
       <section
         id="whychoose"
@@ -682,9 +697,8 @@ export default function Home() {
             muted
             playsInline
             className="object-cover w-full h-full"
-            style={{ filter: 'blur(16px) brightness(1.2) saturate(1.2)' }}
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/70 via-white/80 to-black/80 mix-blend-lighten" />
+          <div className="absolute inset-0 bg-black/90" />
         </div>
         <div className="relative z-10 w-full max-w-4xl mx-auto py-24 flex flex-col items-center">
           <h2
@@ -738,12 +752,27 @@ export default function Home() {
         </div>
       </section>
 
+      <FullWidthBorder />
+
       {/* Trusted By */}
       <TrustedBySection />
 
+      <FullWidthBorder />
+
       {/* AI Analytics FAQ Section */}
-      <section id="ai-analytics-faq" className="w-full min-h-screen bg-black py-20 px-4 flex flex-col items-center justify-center">
-        <div className="max-w-5xl w-full mx-auto">
+      <section id="ai-analytics-faq" className="w-full min-h-screen bg-black py-20 px-4 flex flex-col items-center justify-center relative">
+        <div className="absolute inset-0 w-full h-full z-0">
+            <video
+              src="/3.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="object-cover w-full h-full"
+            />
+            <div className="absolute inset-0 bg-black/90" />
+        </div>
+        <div className="w-full px-4 md:px-8 mx-auto relative z-10">
           {/* AI Analytics Dashboard */}
           <div className="mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-center mb-8 text-cyan-400 drop-shadow-lg">Ignysis AI Analytics Dashboard</h2>
@@ -761,7 +790,7 @@ export default function Home() {
                 ))}
               </div>
             </div>
-            <div className="max-w-5xl w-full mx-auto bg-black rounded-3xl border-2 border-yellow-400 p-8 h-[36rem] relative overflow-hidden shadow-2xl flex items-center justify-center">
+            <div className="w-full mx-auto bg-black rounded-3xl border-2 border-yellow-400 p-8 h-[36rem] relative overflow-hidden shadow-2xl flex items-center justify-center">
               <ResponsiveContainer width="100%" height="100%">
                 {chartElement || <div />}
               </ResponsiveContainer>
@@ -806,50 +835,14 @@ export default function Home() {
         `}</style>
       </section>
 
+      <FullWidthBorder />
+
+      <Contact />
+
+      <FullWidthBorder />
+
       {/* Modern Multi-Column Footer */}
-      <footer className="w-full bg-black text-white py-10 px-4 mt-0 border-t border-gray-800">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-8 items-start">
-          {/* Newsletter */}
-          <div className="md:col-span-2 flex flex-col gap-4">
-            <h4 className="text-lg font-bold mb-2 text-yellow-400">Stay Up to Date</h4>
-            <p className="text-gray-300 text-sm mb-2">Get the latest on AI analytics, platform updates, and exclusive offers.</p>
-            <form className="flex w-full max-w-xs">
-              <input type="email" placeholder="Email address" className="flex-1 px-4 py-2 rounded-l-lg bg-gray-800 text-white border border-gray-700 focus:outline-none" />
-              <button type="submit" className="px-4 py-2 bg-yellow-400 text-black font-bold rounded-r-lg hover:bg-yellow-300 transition">Sign Up</button>
-            </form>
-          </div>
-          {/* Product */}
-          <div className="flex flex-col gap-2">
-            <h4 className="text-lg font-bold mb-2 text-yellow-400">Product</h4>
-            <a href="#services" className="text-gray-300 hover:text-yellow-400 transition">AI Solutions</a>
-            <a href="#ai-analytics-faq" className="text-gray-300 hover:text-yellow-400 transition">Analytics Dashboard</a>
-            <a href="#workdone" className="text-gray-300 hover:text-yellow-400 transition">Case Studies</a>
-            <a href="#contact" className="text-gray-300 hover:text-yellow-400 transition">Contact</a>
-          </div>
-          {/* Company */}
-          <div className="flex flex-col gap-2">
-            <h4 className="text-lg font-bold mb-2 text-yellow-400">Company</h4>
-            <a href="#whychoose" className="text-gray-300 hover:text-yellow-400 transition">Why IGNYSYS</a>
-            <a href="#trusted-by" className="text-gray-300 hover:text-yellow-400 transition">Trusted By</a>
-            <a href="#faq" className="text-gray-300 hover:text-yellow-400 transition">FAQ</a>
-          </div>
-          {/* Resources */}
-          <div className="flex flex-col gap-2">
-            <h4 className="text-lg font-bold mb-2 text-yellow-400">Resources</h4>
-            <a href="#ai-analytics-faq" className="text-gray-300 hover:text-yellow-400 transition">Documentation</a>
-            <a href="mailto:contact@thechangers.ai" className="text-gray-300 hover:text-yellow-400 transition">Support</a>
-            <a href="#" className="text-gray-300 hover:text-yellow-400 transition">Blog</a>
-          </div>
-          {/* Social */}
-          <div className="flex flex-col gap-2">
-            <h4 className="text-lg font-bold mb-2 text-yellow-400">Connect</h4>
-            <a href="https://twitter.com/" target="_blank" rel="noopener" className="text-gray-300 hover:text-yellow-400 transition">Twitter (X)</a>
-            <a href="https://discord.com/" target="_blank" rel="noopener" className="text-gray-300 hover:text-yellow-400 transition">Discord</a>
-            <a href="https://github.com/Kamuyu-cyber/Ignysis_site" target="_blank" rel="noopener" className="text-gray-300 hover:text-yellow-400 transition">GitHub</a>
-          </div>
-        </div>
-        <div className="text-center text-xs text-gray-500 mt-10">&copy; {new Date().getFullYear()} IGNYSYS. All rights reserved.</div>
-      </footer>
+      <Footer />
     </div>
   );
 }
@@ -899,15 +892,14 @@ function TrustedBySection() {
           muted
           playsInline
           className="object-cover w-full h-full"
-          style={{ filter: 'blur(16px) brightness(1.2) saturate(1.2)' }}
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/70 via-white/80 to-black/80 mix-blend-lighten" />
+        <div className="absolute inset-0 bg-black/90" />
       </div>
       <div className="relative z-10 max-w-7xl mx-auto text-center py-16 px-4 md:px-8 w-full">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 tracking-tight">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-yellow-400 mb-4 tracking-tight">
           Trusted Companies and Partners
         </h1>
-        <p className="text-lg md:text-xl text-gray-600 mb-10">
+        <p className="text-lg md:text-xl text-gray-300 mb-10">
           These global and open-source leaders trust us for real-time network support.
         </p>
         {/* Animated logo grid */}
