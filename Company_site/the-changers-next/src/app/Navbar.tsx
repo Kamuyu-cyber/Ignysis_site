@@ -2,6 +2,7 @@
 
 import { ChevronDown } from "lucide-react";
 import React, { useState } from "react";
+import Link from 'next/link';
 
 const services = [
   "AI-Powered Medical Diagnostics",
@@ -25,15 +26,15 @@ export default function Navbar() {
     <nav className="w-full flex justify-center md:justify-between items-center py-3 px-2 md:px-8 sticky top-0 z-50 bg-transparent shadow-md border-b border-white/10">
       <span className="text-base md:text-lg font-bold tracking-widest text-white">IGNYSIS</span>
       <ul className="hidden md:flex gap-6 text-sm font-normal text-white">
-        <li><a href="/" className="hover:text-accent transition-colors">Home</a></li>
-        <li><a href="/#about" className="hover:text-accent transition-colors">About</a></li>
-        <li><a href="/#contact" className="hover:text-accent transition-colors">Contact</a></li>
+        <li><Link href="/" className="hover:text-accent transition-colors">Home</Link></li>
+        <li><Link href="/#about" className="hover:text-accent transition-colors">About</Link></li>
+        <li><Link href="/#contact" className="hover:text-accent transition-colors">Contact</Link></li>
         <li className="relative" onMouseEnter={() => setSolutionsOpen(true)} onMouseLeave={() => setSolutionsOpen(false)}>
           <button className="hover:text-accent transition-colors flex items-center gap-1">Explore our solutions <ChevronDown className="w-4 h-4" /></button>
           {solutionsOpen && (
             <div className="absolute left-0 mt-2 w-64 bg-white text-black rounded-xl shadow-xl py-2 z-50">
               {services.map((service, idx) => (
-                <a key={idx} href="/#services" className="block px-5 py-2 hover:bg-blue-50 text-sm font-medium">{service}</a>
+                <Link key={idx} href="/#services" className="block px-5 py-2 hover:bg-blue-50 text-sm font-medium">{service}</Link>
               ))}
             </div>
           )}
@@ -43,13 +44,12 @@ export default function Navbar() {
           {workOpen && (
             <div className="absolute left-0 mt-2 w-72 bg-white text-black rounded-xl shadow-xl py-2 z-50">
               {workDone.map((work, idx) => (
-                <a key={idx} href="/#workdone" className="block px-5 py-2 hover:bg-blue-50 text-sm font-medium">{work}</a>
+                <Link key={idx} href="/#workdone" className="block px-5 py-2 hover:bg-blue-50 text-sm font-medium">{work}</Link>
               ))}
             </div>
           )}
         </li>
-        <li><a href="/#contact" className="hover:text-accent transition-colors">Contact</a></li>
-        <li><a href="/trusted-by" className="hover:text-accent transition-colors">Trusted By</a></li>
+        <li><Link href="/trusted-by" className="hover:text-accent transition-colors">Trusted By</Link></li>
       </ul>
     </nav>
   );

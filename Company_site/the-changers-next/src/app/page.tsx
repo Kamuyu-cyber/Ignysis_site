@@ -4,87 +4,15 @@ import React, { useState, useEffect, useRef } from "react"; // Consolidate impor
 import { ChevronDown } from "lucide-react";
 import { useInView } from "framer-motion";
 import { motion } from "framer-motion";
-import { ArrowRight, MessageCircle, X } from "lucide-react";
+import { ArrowRight, X } from "lucide-react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import SectionDivider from "./SectionDivider";
-import UsageChart from "./UsageChart";
 import { BarChart3, Hexagon, Users } from "lucide-react";
 import { LineChart, Line, BarChart, Bar, AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import About from "./about/page";
 import FullWidthBorder from "./FullWidthBorder";
 import Contact from "./contact/page";
 import Footer from "./Footer";
-
-const team = [
-  { name: "Cheruiyot Elkanah", title: "CEO", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=ceo&backgroundColor=blue,red,white&accessoriesProbability=100" },
-  { name: "Frank Kamuyu", title: "CDO", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=cdo&backgroundColor=blue,red,white&accessoriesProbability=100" },
-  { name: "Ben Kyalo", title: "CTO", img: "https://api.dicebear.com/7.x/avataaars/svg?seed=cto&backgroundColor=blue,red,white&accessoriesProbability=100" },
-];
-
-const partners = [
-  { name: "Spotify", logo: "https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg", desc: "Music streaming platform" },
-  { name: "Google", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg", desc: "Search and cloud services" },
-  { name: "Microsoft", logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg", desc: "Productivity and cloud solutions" },
-  { name: "OpenAI", logo: "https://upload.wikimedia.org/wikipedia/commons/4/4b/OpenAI_Logo.svg", desc: "AI research and deployment" },
-  { name: "Jane Doe", logo: "https://randomuser.me/api/portraits/women/44.jpg", desc: "AI Consultant" },
-  { name: "John Smith", logo: "https://randomuser.me/api/portraits/men/46.jpg", desc: "Tech Entrepreneur" },
-  { name: "Netflix", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", desc: "Streaming entertainment" },
-  { name: "Amazon", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg", desc: "E-commerce and cloud computing" },
-];
-
-const offerings = [
-  {
-    title: "Machine Learning Systems",
-    desc: "Custom ML models for your business needs.",
-    icon: "🤖",
-  },
-  {
-    title: "Automation Tools",
-    desc: "Streamline workflows with intelligent automation.",
-    icon: "⚙️",
-  },
-  {
-    title: "Predictive Analytics",
-    desc: "Data-driven insights for smarter decisions.",
-    icon: "📈",
-  },
-  {
-    title: "Natural Language Processing",
-    desc: "Extract meaning and automate tasks from text and speech.",
-    icon: "🗣️",
-  },
-  {
-    title: "Computer Vision",
-    desc: "Image and video analysis for real-world applications.",
-    icon: "👁️",
-  },
-  {
-    title: "AI Chatbots",
-    desc: "Conversational agents for support and engagement.",
-    icon: "💬",
-  },
-  {
-    title: "Recommendation Systems",
-    desc: "Personalized content and product suggestions.",
-    icon: "🎯",
-  },
-  {
-    title: "Data Engineering",
-    desc: "Robust pipelines for data collection and processing.",
-    icon: "🛠️",
-  },
-  {
-    title: "AI Strategy Consulting",
-    desc: "Expert guidance to unlock AI value for your business.",
-    icon: "🧠",
-  },
-  {
-    title: "Edge AI Solutions",
-    desc: "Deploy AI on devices for real-time intelligence.",
-    icon: "📱",
-  },
-];
+import Image from "next/image";
 
 const whyChoose = [
   {
@@ -556,11 +484,6 @@ export default function Home() {
 
       <FullWidthBorder />
 
-      {/* Divider between Explore our Solutions and Explore our Work */}
-      <SectionDivider />
-
-      <FullWidthBorder />
-
       {/* Work Done Section */}
       <section id="workdone" className="relative w-full flex flex-col items-center justify-center px-0 py-0 bg-black overflow-hidden" style={{marginTop: 0, paddingTop: 0}}>
         {/* Blurred video background, matching services section */}
@@ -616,9 +539,11 @@ export default function Home() {
                 className="w-full"
               >
                 <div className="group cursor-pointer transition-all duration-200 hover:shadow-lg bg-black/60 shadow-sm hover:border-yellow-400 rounded-xl flex flex-col h-full">
-                  <img
+                  <Image
                     src={project.image}
                     alt={project.title}
+                    width={400}
+                    height={192}
                     className="w-full h-48 object-cover rounded-t-xl mb-4"
                   />
                   <div className="p-6 flex-1 flex flex-col">
@@ -918,7 +843,7 @@ function TrustedBySection() {
               }}
               className="flex flex-col items-center"
             >
-              <img src={logo.src} alt={logo.name} className="h-14 w-14 object-contain mb-2" />
+              <Image src={logo.src} alt={logo.name} width={56} height={56} className="h-14 w-14 object-contain mb-2" />
               <span className="text-xs font-semibold text-gray-700">{logo.name}</span>
             </motion.div>
           ))}

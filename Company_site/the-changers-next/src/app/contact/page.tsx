@@ -24,10 +24,12 @@ const Contact = () => {
     company: "",
     message: ""
   });
-  const { toast } = useToast ? useToast() : { toast: () => {} };
+  const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Simulate form submission
     toast({
       title: "Message Sent!",
       description: "We'll get back to you within 24 hours.",
@@ -93,11 +95,13 @@ const Contact = () => {
             Ready to Transform Your Business with
             <span className="text-yellow-400"> AI Solutions?</span>
           </h2>
+          
           <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-            Let's discuss how ignsys can help you harness the power of real-time AI 
+            Let&apos;s discuss how ignsys can help you harness the power of real-time AI 
             to drive innovation and growth in your organization.
           </p>
         </div>
+
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Form */}
           <Card className="p-8 bg-[#111827] border-gray-700/50 group">
@@ -107,9 +111,10 @@ const Contact = () => {
               </div>
               <div>
                 <h3 className="text-2xl font-bold text-white">Send us a Message</h3>
-                <p className="text-gray-400">We'll respond within 24 hours</p>
+                <p className="text-gray-400">We&apos;ll respond within 24 hours</p>
               </div>
             </div>
+
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
@@ -242,7 +247,7 @@ const Contact = () => {
                 Our Response Time Promise
               </h3>
               <p className="text-gray-400">
-                We understand that your time is valuable. That's why we guarantee a response 
+                We understand that your time is valuable. That&apos;s why we guarantee a response 
                 to all inquiries within 24 hours during business days, and often much sooner.
               </p>
             </div>
